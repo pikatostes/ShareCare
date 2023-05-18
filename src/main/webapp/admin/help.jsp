@@ -23,7 +23,7 @@
         <%
             Connection conexion = HelloServlet.connect();
             Statement s = conexion.createStatement();
-            ResultSet listado = s.executeQuery ("SELECT * FROM user ORDER BY 1");
+            ResultSet listado = s.executeQuery ("SELECT * FROM help ORDER BY 1");
         %>
         <table class="table table-striped">
             <tr><th>ID</th><th>Username</th><th>Contraseña</th><th>Nombre</th><th>Telefono</th><th>Correo</th><th>Skill</th></tr>
