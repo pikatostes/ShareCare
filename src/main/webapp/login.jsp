@@ -19,7 +19,7 @@
             <h1>ShareCare</h1>
         </a>
     </div>
-    <form>
+    <form method="post" action="">
         <h1 style="text-align: center;">Log In</h1>
         <label for="username"></label>
         <input type="text" id="username" name="username" required placeholder="User">
