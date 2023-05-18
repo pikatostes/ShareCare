@@ -14,6 +14,12 @@
 </head>
 <body>
 <div id="contenedor">
+        <div class="logo">
+            <a href="index.jsp"><img src="imagen/solidarity.avif" alt=""></a>
+            <a href="index.jsp">
+                <h1>ShareCare</h1>
+            </a>
+        </div>
     <form>
         <h1 style="text-align: center;">Register</h1>
         <label for="email"></label>
@@ -22,6 +28,7 @@
         <input type="text" id="username" name="userName" required placeholder="User">
         <label for="password"></label>
         <input type="password" id="password" name="password" required placeholder="Password">
+        <a href="login.jsp" style="text-align: center">Already have an account?</a>
         <input type="submit" value="Register">
     </form>
 </div>

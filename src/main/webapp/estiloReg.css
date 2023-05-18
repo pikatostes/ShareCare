@@ -5,10 +5,27 @@ body {
     padding: 0;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo a {
+    color: black;
+    text-decoration: none;
+}
+
+.logo a img {
+    height: 50px;
+    margin-right: 10px;
+}
+
 #contenedor {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
 }
 
@@ -70,18 +87,4 @@ input[type="submit"] {
     margin-top: 20px;
     padding: 10px;
     width: 100%;
-}
-
-input[type="text"]::before,
-input[type="email"]::before,
-input[type="password"]::before {
-    content: '';
-    border-right: 10px solid black;
-    height: 30px;
-    margin-right: 10px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: calc(50% - 21px);
-    /* Ajusta la posición de la línea vertical */
 }

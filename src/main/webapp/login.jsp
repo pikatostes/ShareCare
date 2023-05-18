@@ -14,7 +14,7 @@
 <body>
 <div id="container">
     <div class="logo">
-        <a href="index.jsp"><img src="imagen/solidarity.jpg" alt=""></a>
+        <a href="index.jsp"><img src="imagen/solidarity.avif" alt=""></a>
         <a href="index.jsp">
             <h1>ShareCare</h1>
         </a>

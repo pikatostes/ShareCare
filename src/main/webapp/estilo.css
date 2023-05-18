@@ -3,20 +3,28 @@ body {
     background-color: #ffffff;
 }
 
-body * :not(header){
+* {
+    font-family: sans-serif;
+    text-decoration: none;
+}
+
+body * :not(header) {
     border-radius: 5px;
 }
 
 #container {
-    background-color: #d2d2d2;
+    background-color: white;
+    height: 100%;
 }
 
 header {
+    margin: 2px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: d2d2d2;
     padding: 10px;
+    box-shadow: gray 0px 0px 10px 0px;
+    height: 10vh;
 }
 
 .logo {
@@ -38,16 +46,17 @@ header nav {
     padding: 10px;
 }
 
-header nav a.log-in, header nav a.register {
+header nav a.log-in,
+header nav a.register {
     padding: 10px;
     border-radius: 10px;
-    text-decoration: none;
     color: white;
     margin: 0px 5px 0px 10px;
+    box-shadow: gray 0px 0px 7.5px 0px;
 }
 
 header nav a.log-in {
-    background-color: lightgreen ;
+    background-color: lightgreen;
 }
 
 header nav a.register {
