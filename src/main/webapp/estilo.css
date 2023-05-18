@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    background-color: #ffffff;
+}
+
+body * :not(header){
+    border-radius: 5px;
+}
+
+#container {
+    background-color: #d2d2d2;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: d2d2d2;
+    padding: 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo h1 {
+    color: #4A4D50;
+}
+
+.logo img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+header nav {
+    color: #ffffff;
+    padding: 10px;
+}
+
+header nav a.log-in, header nav a.register {
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    margin: 0px 5px 0px 10px;
+}
+
+header nav a.log-in {
+    background-color: lightgreen ;
+}
+
+header nav a.register {
+    background-color: darkgreen;
+}
