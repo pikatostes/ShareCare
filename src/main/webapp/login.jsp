@@ -1,51 +1,35 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*" %>
 <%
-    // Establecer la conexión a la base de datos SQLite
-    String dbFilePath = "project.db"; // Reemplaza con la ruta de tu archivo de base de datos SQLite
-
-    // Variables para almacenar el usuario y la contraseña enviados desde el formulario
-    String usernameInput = request.getParameter("username");
-    String passwordInput = request.getParameter("password");
-
-    // Mensaje de error en caso de credenciales inválidas
-    String errorMessage = "";
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
 
     try {
-        Connection con = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-
-        // Cargar el driver de SQLite
+        // Establecer conexión a la base de datos SQLite
         Class.forName("org.sqlite.JDBC");
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db");
 
-        // Establecer la conexión a la base de datos SQLite
-        con = DriverManager.getConnection("jdbc:sqlite:" + dbFilePath);
+        // Verificar las credenciales del usuario
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM User WHERE userName = ? AND password = ?");
+        statement.setString(1, username);
+        statement.setString(2, password);
+        ResultSet resultSet = statement.executeQuery();
 
-        // Consulta para verificar las credenciales del usuario en la tabla "User"
-        String query = "SELECT * FROM User WHERE username = ? AND password = ?";
-        PreparedStatement pstmt = con.prepareStatement(query);
-        pstmt.setString(1, usernameInput);
-        pstmt.setString(2, passwordInput);
-        rs = pstmt.executeQuery();
-
-        // Verificar si se encontró un usuario con las credenciales proporcionadas
-        if (rs.next()) {
-            // Credenciales válidas, mostrar mensaje de éxito
-            // out.println("<h2>Login successful!</h2>");
-            // out.println("<p>Welcome, " + rs.getString("username") + "!</p>");
+        if(resultSet.next()) {
+            // Credenciales válidas, redirigir al usuario a la página de éxito
             response.sendRedirect("index.jsp");
         } else {
             // Credenciales inválidas, mostrar mensaje de error
-            errorMessage = "Invalid username or password. Please try again.";
+            out.println("Credenciales inválidas. Por favor, intente nuevamente.");
         }
 
-        // Cerrar la conexión y liberar recursos
-        rs.close();
-        pstmt.close();
-        con.close();
+        // Cerrar la conexión y liberar los recursos
+        resultSet.close();
+        statement.close();
+        connection.close();
     } catch (Exception e) {
-        e.printStackTrace();
+        // Manejar cualquier excepción
+        out.println("Error: " + e.getMessage());
     }
 %>
 <html>
@@ -68,7 +52,7 @@
             <h1>ShareCare</h1>
         </a>
     </div>
-    <form>
+    <form action="login.jsp" method="post">
         <h1 style="text-align: center;">Log In</h1>
         <label for="username"></label>
         <input type="text" id="username" name="username" required placeholder="User">
