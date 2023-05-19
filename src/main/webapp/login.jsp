@@ -1,4 +1,53 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.sql.*" %>
+<%
+    // Establecer la conexión a la base de datos SQLite
+    String dbFilePath = "project.db"; // Reemplaza con la ruta de tu archivo de base de datos SQLite
+
+    // Variables para almacenar el usuario y la contraseña enviados desde el formulario
+    String usernameInput = request.getParameter("username");
+    String passwordInput = request.getParameter("password");
+
+    // Mensaje de error en caso de credenciales inválidas
+    String errorMessage = "";
+
+    try {
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        // Cargar el driver de SQLite
+        Class.forName("org.sqlite.JDBC");
+
+        // Establecer la conexión a la base de datos SQLite
+        con = DriverManager.getConnection("jdbc:sqlite:" + dbFilePath);
+
+        // Consulta para verificar las credenciales del usuario en la tabla "User"
+        String query = "SELECT * FROM User WHERE username = ? AND password = ?";
+        PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setString(1, usernameInput);
+        pstmt.setString(2, passwordInput);
+        rs = pstmt.executeQuery();
+
+        // Verificar si se encontró un usuario con las credenciales proporcionadas
+        if (rs.next()) {
+            // Credenciales válidas, mostrar mensaje de éxito
+            // out.println("<h2>Login successful!</h2>");
+            // out.println("<p>Welcome, " + rs.getString("username") + "!</p>");
+            response.sendRedirect("index.jsp");
+        } else {
+            // Credenciales inválidas, mostrar mensaje de error
+            errorMessage = "Invalid username or password. Please try again.";
+        }
+
+        // Cerrar la conexión y liberar recursos
+        rs.close();
+        pstmt.close();
+        con.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

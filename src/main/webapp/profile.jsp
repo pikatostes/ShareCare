@@ -17,7 +17,7 @@
                 </a>
             </div>
             <nav>
-                <a href="" class="nav-link">Home</a>
+                <a href="index.jsp" class="nav-link">Home</a>
                 <a href="" class="nav-link">Help someone</a>
                 <a href="" class="nav-link">Quam?</a>
                 <a href="" class="nav-link">Placeat!</a>
