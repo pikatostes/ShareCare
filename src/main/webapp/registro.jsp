@@ -48,7 +48,7 @@
         <label for="password"></label>
         <input type="password" id="password" name="password" required placeholder="Password">
         <label for="name"><input type="text" name="name" id="name" placeholder="Name"></label>
-        <label for="phone"><input type="tel" name="phone" id="phone"></label>
+        <label for="phone"><input type="tel" name="phone" id="phone" placeholder="Phone"></label>
         <a href="login.jsp" style="text-align: center">Already have an account?</a>
         <input type="submit" value="Register">
     </form>
