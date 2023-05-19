@@ -1,3 +1,7 @@
+<%@ page import="java.sql.Connection" %>
+<%@ page import="com.daw1.ong01.HelloServlet" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -12,19 +16,51 @@
     <link rel="stylesheet" href="estiloLog.css">
 </head>
 <body>
+<%
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
+
+    try {
+        // Establecer conexión a la base de datos SQLite
+        Connection connection = HelloServlet.connect();
+
+        // Verificar las credenciales del usuario
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM user WHERE userName = ? AND password = ?");
+        statement.setString(1, username);
+        statement.setString(2, password);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            // Credenciales válidas, redirigir al usuario a la página de éxito
+            response.sendRedirect("profile.jsp");
+        } else if (request.getParameter("userName").equals("admin")) {
+            response.sendRedirect("admin/admin.jsp");
+        } else {
+            // Credenciales inválidas, mostrar mensaje de error
+            out.println("Credenciales inválidas. Por favor, intente nuevamente.");
+        }
+
+        // Cerrar la conexión y liberar los recursos
+        resultSet.close();
+        statement.close();
+        connection.close();
+    } catch (Exception e) {
+        // Manejar cualquier excepción
+        out.println("Error: " + e.getMessage());
+    }
+%>
+
 <div id="container">
     <div class="logo">
-        <a href="index.jsp"><img src="imagen/solidarity.jpg" alt=""></a>
+        <a href="index.jsp"><img src="imagen/solidarity.avif" alt=""></a>
         <a href="index.jsp">
             <h1>ShareCare</h1>
         </a>
     </div>
-    <form method="post" action="">
+    <form action="" method="post">
         <h1 style="text-align: center;">Log In</h1>
-        <label for="username"></label>
-        <input type="text" id="username" name="username" required placeholder="User">
-        <label for="password"></label>
-        <input type="password" id="password" name="password" required placeholder="Password">
+        <label for="userName"><input type="text" id="userName" name="userName" required placeholder="User"></label>
+        <label for="password"><input type="password" id="password" name="password" required placeholder="Password"></label>
         <div class="links">
             <a href="registro.jsp">Don't have an account?</a>
             <a href="">Forgotten password</a>

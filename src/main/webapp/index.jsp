@@ -23,7 +23,7 @@
             <a href="index.jsp"><h1>ShareCare</h1></a>
         </div>
         <nav>
-            <a href="" class="nav-link">Lorem.</a>
+            <a href="profile.jsp" class="nav-link">Lorem.</a>
             <a href="" class="nav-link">Fugiat.</a>
             <a href="" class="nav-link">Quam?</a>
             <a href="" class="nav-link">Placeat!</a>

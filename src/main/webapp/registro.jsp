@@ -1,4 +1,4 @@
-
+<%@ page import="com.daw1.ong01.UserDB" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,15 +13,43 @@
     <link rel="stylesheet" href="estiloReg.css">
 </head>
 <body>
+<%
+    // Obtener los parámetros del formulario
+    String email = request.getParameter("email");
+    String userName = request.getParameter("userName");
+    String password = request.getParameter("password");
+    String name = request.getParameter("name");
+    String phone = request.getParameter("phone");
+
+    // Verificar si se han enviado los datos del formulario
+    if (email != null && userName != null && password != null) {
+        // Insertar el nuevo usuario en la base de datos
+        if (UserDB.insertUser(userName, password, name, phone, email, 0)) {
+            // Redireccionar al inicio de sesión si la inserción fue exitosa
+            response.sendRedirect("login.jsp");
+        } else {
+            out.println("Error al registrar el usuario.");
+        }
+    }
+%>
+
 <div id="contenedor">
-    <form>
+    <div class="logo">
+        <a href="index.jsp"><img src="imagen/solidarity.avif" alt=""></a>
+        <a href="index.jsp">
+            <h1>ShareCare</h1>
+        </a>
+    </div>
+    <form method="get" action="admin/grabarSocio.jsp">
         <h1 style="text-align: center;">Register</h1>
-        <label for="email"></label>
-        <input type="email" id="email" name="email" required placeholder="Email">
-        <label for="username"></label>
-        <input type="text" id="username" name="userName" required placeholder="User">
-        <label for="password"></label>
-        <input type="password" id="password" name="password" required placeholder="Password">
+        <label for="id"><input type="number" id="id" name="id" required placeholder="Id"></label>
+        <label for="email"><input type="email" id="email" name="email" required placeholder="Email"></label>
+        <label for="username"><input type="text" id="username" name="userName" required placeholder="User"></label>
+        <label for="password"><input type="password" id="password" name="password" required placeholder="Password"></label>
+        <label for="name"><input type="text" name="name" id="name" placeholder="Name"></label>
+        <label for="phone"><input type="tel" name="phone" id="phone" placeholder="Phone"></label>
+        <label for="skill"><input type="number" id="skill" name="skill" required placeholder="Skill"></label>
+        <a href="login.jsp" style="text-align: center">Already have an account?</a>
         <input type="submit" value="Register">
     </form>
 </div>
