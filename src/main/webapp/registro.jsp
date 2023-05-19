@@ -1,6 +1,25 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.daw1.ong01.UserDB" %>
 <html>
+<%
+    // Obtener los parámetros del formulario
+    String email = request.getParameter("email");
+    String userName = request.getParameter("userName");
+    String password = request.getParameter("password");
+    String name = request.getParameter("name");
+    String phone = request.getParameter("phone");
+
+    // Verificar si se han enviado los datos del formulario
+    if (email != null && userName != null && password != null) {
+        // Insertar el nuevo usuario en la base de datos
+        if (UserDB.insertUser(userName, password, name, phone, email, 0)) {
+            // Redireccionar al inicio de sesión si la inserción fue exitosa
+            response.sendRedirect("login.jsp");
+        } else {
+            out.println("Error al registrar el usuario.");
+        }
+    }
+%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -28,6 +47,8 @@
         <input type="text" id="username" name="userName" required placeholder="User">
         <label for="password"></label>
         <input type="password" id="password" name="password" required placeholder="Password">
+        <label for="name"><input type="text" name="name" id="name" placeholder="Name"></label>
+        <label for="phone"><input type="tel" name="phone" id="phone"></label>
         <a href="login.jsp" style="text-align: center">Already have an account?</a>
         <input type="submit" value="Register">
     </form>
