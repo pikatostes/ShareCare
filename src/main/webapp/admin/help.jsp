@@ -23,46 +23,46 @@
         <%
             Connection conexion = HelloServlet.connect();
             Statement s = conexion.createStatement();
-            ResultSet listado = s.executeQuery ("SELECT * FROM user ORDER BY 1");
+            ResultSet listado = s.executeQuery ("SELECT * FROM help ORDER BY 1");
         %>
         <table class="table table-striped">
-            <tr><th>ID</th><th>Username</th><th>Contraseña</th><th>Nombre</th><th>Telefono</th><th>Correo</th><th>Skill</th></tr>
-            <form method="get" action="grabarSocio.jsp">
-                <tr><td><input type="text" name="id" size="4"></td>
-                    <td><input type="text" name="userName" size="8"></td>
-                    <td><input type="text" name="password" size="8"></td>
-                    <td><input type="text" name="name" size="12"></td>
-                    <td><input type="text" name="phone" size="9"></td>
-                    <td><input type="text" name="email" size="18"></td>
-                    <td><input type="text" name="skill" size="4"></td>
+            <tr><th>ID Solicitante</th><th>Fecha de creacion</th><th>Skill</th><th>Estado</th><th>ID Contribuidor</th><th>Fecha de inicio</th><th>Fecha de finalización</th></tr>
+            <form method="get" action="grabarHelp.jsp">
+                <tr><td><input type="text" name="ids" size="5"></td>
+                    <td><input type="text" name="dateCreated" size="8"></td>
+                    <td><input type="text" name="skill" size="5"></td>
+                    <td><input type="text" name="state" size="10"></td>
+                    <td><input type="text" name="idc" size="5"></td>
+                    <td><input type="text" name="dateStart" size="8"></td>
+                    <td><input type="text" name="dateEnd" size="8"></td>
                     <td><button type="submit" value="Añadir" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Añadir</button></td><td></td></tr>
             </form>
             <%
                 while (listado.next()) {
                     out.println("<tr><td>");
-                    out.println(listado.getString("id") + "</td>");
-                    out.println("<td>" + listado.getString("userName") + "</td>");
-                    out.println("<td>" + listado.getString("password") + "</td>");
-                    out.println("<td>" + listado.getString("name") + "</td>");
-                    out.println("<td>" + listado.getString("phone") + "</td>");
-                    out.println("<td>" + listado.getString("email") + "</td>");
+                    out.println(listado.getString("ids") + "</td>");
+                    out.println("<td>" + listado.getString("dateCreated") + "</td>");
                     out.println("<td>" + listado.getString("skill") + "</td>");
+                    out.println("<td>" + listado.getString("state") + "</td>");
+                    out.println("<td>" + listado.getString("idc") + "</td>");
+                    out.println("<td>" + listado.getString("dateStart") + "</td>");
+                    out.println("<td>" + listado.getString("dateEnd") + "</td>");
             %>
             <td>
-                <form method="get" action="modificarSocio.jsp">
-                    <input type="hidden" name="id" value="<%=listado.getString("id") %>">
-                    <input type="hidden" name="userName" value="<%=listado.getString("userName") %>">
-                    <input type="hidden" name="password" value="<%=listado.getString("password") %>">
-                    <input type="hidden" name="name" value="<%=listado.getString("name") %>">
-                    <input type="hidden" name="phone" value="<%=listado.getString("phone") %>">
-                    <input type="hidden" name="email" value="<%=listado.getString("email") %>">
+                <form method="get" action="modificarHelp.jsp">
+                    <input type="hidden" name="ids" value="<%=listado.getString("ids") %>">
+                    <input type="hidden" name="dateCreated" value="<%=listado.getString("dateCreated") %>">
                     <input type="hidden" name="skill" value="<%=listado.getString("skill") %>">
+                    <input type="hidden" name="state" value="<%=listado.getString("state") %>">
+                    <input type="hidden" name="idc" value="<%=listado.getString("idc") %>">
+                    <input type="hidden" name="dateStart" value="<%=listado.getString("dateStart") %>">
+                    <input type="hidden" name="dateEnd" value="<%=listado.getString("dateEnd") %>">
                     <button type="submit"  class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Modificar</button>
                 </form>
             </td>
             <td>
-                <form method="get" action="borrarSocio.jsp">
-                    <input type="hidden" name="id" value="<%=listado.getString("id") %>"/>
+                <form method="get" action="borrarHelp.jsp">
+                    <input type="hidden" name="ids" value="<%=listado.getString("ids") %>"/>
                     <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
                 </form>
             </td></tr>
