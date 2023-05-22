@@ -4,6 +4,7 @@
 
 <%
   // Obtener los parámetros enviados desde el formulario
+  String categoria = request.getParameter("categoria");
   String usuario = request.getParameter("usuario");
   String descripcion = request.getParameter("descripcion");
 
@@ -12,11 +13,12 @@
     Connection connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db");
 
     // Insertar la solicitud en la tabla Requests
-    String sql = "INSERT INTO Requests (User, Description, Date) VALUES (?, ?, ?)";
+    String sql = "INSERT INTO Requests (skill, User, Description, Date) VALUES (?, ?, ?, ?)";
     PreparedStatement statement = connection.prepareStatement(sql);
-    statement.setString(1, usuario);
-    statement.setString(2, descripcion);
-    statement.setString(3, new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()));
+    statement.setString(1, categoria);
+    statement.setString(2, usuario);
+    statement.setString(3, descripcion);
+    statement.setString(4, new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()));
 
     int rowsInserted = statement.executeUpdate();
 

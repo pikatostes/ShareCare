@@ -10,8 +10,25 @@
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="../estiloProfile.css">
 </head>
 <body>
+<header>
+  <div class="logo">
+    <a href="index.jsp"><img src="imagen/solidarity.avif" alt=""></a>
+    <a href="index.jsp">
+      <h1>ShareCare</h1>
+    </a>
+  </div>
+  <nav>
+    <a href="index.jsp" class="nav-link">Home</a>
+    <a href="" class="nav-link">Help someone</a>
+    <a href="" class="nav-link">Quam?</a>
+    <a href="" class="nav-link">Placeat!</a>
+    <a href="login.jsp" class="log-in">Log In</a>
+    <a href="registro.jsp" class="register">Register</a>
+  </nav>
+</header>
 <%
   Connection conexion = HelloServlet.connect();
   Statement s = conexion.createStatement();
@@ -40,7 +57,7 @@
 %>
 
 <br>
-<a href="admin.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> Página principal</a>
+<a href="../index.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> Página principal</a>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

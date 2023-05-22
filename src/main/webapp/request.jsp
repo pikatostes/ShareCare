@@ -73,6 +73,12 @@
             <h2>Crear nueva solicitud de ayuda:</h2>
             <form action="crear-solicitud.jsp" method="post">
                 <label for="usuario">Usuario:</label>
+                <select name="categoria" id="categoria">
+                    <option value="1">Carpintería</option>
+                    <option value="2">Electricidad</option>
+                    <option value="3">Fontanería</option>
+                    <option value="4">Jardinería</option>
+                </select><br>
                 <input type="text" name="usuario" id="usuario"><br>
                 <label for="descripcion">Descripción:</label>
                 <textarea name="descripcion" id="descripcion" rows="3"></textarea><br>
