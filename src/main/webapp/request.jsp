@@ -29,19 +29,20 @@
 
     <div id="filterButtons">
         <form action="request.jsp" method="get">
-            <button type="submit" name="category" value="0">All</button>
-            <button type="submit" name="category" value="1">Carpintería</button>
-            <button type="submit" name="category" value="2">Electricidad</button>
-            <button type="submit" name="category" value="3">Fontanería</button>
-            <button type="submit" name="category" value="4">Jardinería</button>
+            <button type="submit" name="category" value="0" class="btn btn-default">All</button>
+            <button type="submit" name="category" value="1" class="btn btn-carpinteria">Carpintería</button>
+            <button type="submit" name="category" value="2" class="btn btn-electricidad">Electricidad</button>
+            <button type="submit" name="category" value="3" class="btn btn-fontaneria">Fontanería</button>
+            <button type="submit" name="category" value="4" class="btn btn-jardineria">Jardinería</button>
         </form>
     </div>
 
     <div id="main">
         <div id="helpRequest">
-            <h1>Solicitudes de Ayuda</h1>
+            <h2>Solicitudes de Ayuda</h2>
             <table class="styled-table">
                 <tr>
+                    <th>Categoria</th>
                     <th>Usuario</th>
                     <th>Descripción</th>
                     <th>Fecha</th>
@@ -75,12 +76,28 @@
 
                         // Recorrer el conjunto de resultados y mostrar las solicitudes de ayuda
                         while (resultSet.next()) {
+                            String skill = resultSet.getString("Skill");
                             String usuario = resultSet.getString("User");
                             String descripcion = resultSet.getString("Description");
                             String fecha = resultSet.getString("Date");
 
                             // Mostrar cada solicitud en una fila de la tabla
                             out.println("<tr>");
+                            switch (skill) {
+                                case "1":
+                                    skill = "Carpinteria";
+                                    break;
+                                case "2":
+                                    skill = "Electricidad";
+                                    break;
+                                case "3":
+                                    skill = "Fontaneria";
+                                    break;
+                                case "4":
+                                    skill = "Jardineria";
+                                    break;
+                            }
+                            out.println("<td>" + skill + "</td>");
                             out.println("<td>" + usuario + "</td>");
                             out.println("<td>" + descripcion + "</td>");
                             out.println("<td>" + fecha + "</td>");
@@ -100,13 +117,14 @@
         <div id="createHelp">
             <h2>Crear nueva solicitud de ayuda:</h2>
             <form action="crear-solicitud.jsp" method="post">
-                <label for="usuario">Usuario:</label>
+                <label  for="categoria">Categoria:</label>
                 <select name="categoria" id="categoria">
                     <option value="1">Carpintería</option>
                     <option value="2">Electricidad</option>
                     <option value="3">Fontanería</option>
                     <option value="4">Jardinería</option>
                 </select><br>
+                <label for="usuario">Usuario:</label>
                 <input type="text" name="usuario" id="usuario"><br>
                 <label for="descripcion">Descripción:</label>
                 <textarea name="descripcion" id="descripcion" rows="3"></textarea><br>

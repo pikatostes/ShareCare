@@ -135,3 +135,44 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #333333;
 }
+
+#filterButtons {
+    width: 100%;
+}
+
+#filterButtons form {
+    width: 800px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn {
+    border-radius: 50px;
+    font-size: 18px;
+    transition: transform 0.3s ease;
+    padding: 10px;
+}
+
+.btn-carpinteria {
+    background-color: #8B4513;
+    color: white;
+}
+
+.btn-electricidad {
+    background-color: yellow;
+    color: black;
+}
+
+.btn-fontaneria {
+    background-color: blue;
+    color: white;
+}
+
+.btn-jardineria {
+    background-color: green;
+    color: white;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}

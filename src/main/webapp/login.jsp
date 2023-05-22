@@ -34,7 +34,7 @@
         if (resultSet.next()) {
             // Credenciales válidas, redirigir al usuario a la página de éxito
             response.sendRedirect("profile.jsp");
-        }userNameParam = request.getParameter("userName");
+        } userNameParam = request.getParameter("userName");
         if (userNameParam != null && userNameParam.equals("admin")) {
             response.sendRedirect("./admin/admin.jsp");
         } else {
