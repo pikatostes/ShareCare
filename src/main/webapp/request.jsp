@@ -27,6 +27,16 @@
         </nav>
     </header>
 
+    <div id="filterButtons">
+        <form action="request.jsp" method="get">
+            <button type="submit" name="category" value="0">All</button>
+            <button type="submit" name="category" value="1">Carpintería</button>
+            <button type="submit" name="category" value="2">Electricidad</button>
+            <button type="submit" name="category" value="3">Fontanería</button>
+            <button type="submit" name="category" value="4">Jardinería</button>
+        </form>
+    </div>
+
     <div id="main">
         <div id="helpRequest">
             <h1>Solicitudes de Ayuda</h1>
@@ -43,12 +53,24 @@
 
                         // Obtener la categoría de las solicitudes a mostrar
                         String categoryParam = request.getParameter("category");
-                        int category = Integer.parseInt(categoryParam);
+                        int category = 0;  // Valor predeterminado
+
+                        if (categoryParam != null && !categoryParam.isEmpty()) {
+                            category = Integer.parseInt(categoryParam);
+                        }
 
                         // Preparar y ejecutar la consulta para obtener las solicitudes de la categoría especificada
-                        String sql = "SELECT * FROM Requests WHERE skill = ?";
-                        PreparedStatement statement = connection.prepareStatement(sql);
-                        statement.setInt(1, category);
+                        String sql = "SELECT * FROM Requests";
+                        PreparedStatement statement;
+
+                        if (category > 0) {
+                            sql += " WHERE skill = ?";
+                            statement = connection.prepareStatement(sql);
+                            statement.setInt(1, category);
+                        } else {
+                            statement = connection.prepareStatement(sql);
+                        }
+
                         ResultSet resultSet = statement.executeQuery();
 
                         // Recorrer el conjunto de resultados y mostrar las solicitudes de ayuda
