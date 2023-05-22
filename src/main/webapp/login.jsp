@@ -30,11 +30,13 @@
         statement.setString(2, password);
         ResultSet resultSet = statement.executeQuery();
 
+        String userNameParam = null;
         if (resultSet.next()) {
             // Credenciales válidas, redirigir al usuario a la página de éxito
             response.sendRedirect("profile.jsp");
-        } else if (request.getParameter("userName").equals("admin")) {
-            response.sendRedirect("admin/admin.jsp");
+        }userNameParam = request.getParameter("userName");
+        if (userNameParam != null && userNameParam.equals("admin")) {
+            response.sendRedirect("./admin/admin.jsp");
         } else {
             // Credenciales inválidas, mostrar mensaje de error
             out.println("Credenciales inválidas. Por favor, intente nuevamente.");

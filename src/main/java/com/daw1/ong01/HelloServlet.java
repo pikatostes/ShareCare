@@ -1,12 +1,15 @@
  package com.daw1.ong01;
 
-import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+ import jakarta.servlet.annotation.WebServlet;
+ import jakarta.servlet.http.HttpServlet;
+ import jakarta.servlet.http.HttpServletRequest;
+ import jakarta.servlet.http.HttpServletResponse;
 
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+ import java.io.IOException;
+ import java.io.PrintWriter;
+ import java.sql.Connection;
+ import java.sql.DriverManager;
+ import java.sql.SQLException;
 
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
@@ -30,7 +33,7 @@ public class HelloServlet extends HttpServlet {
     }
     
     public static Connection connect() throws ClassNotFoundException, SQLException {
-        String url="jdbc:sqlite:/home/zhuyana/project.db";
+        String url="jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db";
         Class.forName("org.sqlite.JDBC");
         return DriverManager.getConnection(url);
     }

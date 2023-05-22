@@ -13,27 +13,26 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
     <title>ShareCare - Index</title>
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="styleIndex.css">
 </head>
 <body>
 <div id="container">
-    <header>
-        <div class="logo">
-            <a href="index.jsp"><img src="imagen/solidarity.avif" alt=""></a>
-            <a href="index.jsp"><h1>ShareCare</h1></a>
-        </div>
-        <nav>
-            <a href="profile.jsp" class="nav-link">Lorem.</a>
-            <a href="" class="nav-link">Fugiat.</a>
-            <a href="" class="nav-link">Quam?</a>
-            <a href="" class="nav-link">Placeat!</a>
+    <div class="logo">
+        <a href="index.jsp"><img src="imagen/solidarity.avif" alt=""></a>
+        <a href="index.jsp">
+            <h1>ShareCare</h1>
+        </a>
+        <div id="login">
             <a href="login.jsp" class="log-in">Log In</a>
             <a href="registro.jsp" class="register">Register</a>
-        </nav>
-    </header>
-    <article>
-
-    </article>
+        </div>
+    </div>
+    <div class="nav-link">
+        <a href="" id="hammer"><img src="imagen/hammerSaw.png" alt="" height="75px">Carpinteria</a>
+        <a href="" id="lightning"><img src="imagen/lightning.png" alt="" height="75px">Electricidad</a>
+        <a href="" id="water"><img src="imagen/water.png" alt="" height="75px">Fontaneria</a>
+        <a href="" id="garden"><img src="imagen/scissors.png" alt="" height="75px">Jardineria</a>
+    </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>

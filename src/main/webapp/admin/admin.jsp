@@ -12,11 +12,27 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="../estilo.css">
     <title>ShareCare - Administration</title>
 </head>
 <body>
 <div class="container">
+    <header>
+        <div class="logo">
+            <a href="index.jsp"><img src="imagen/solidarity.avif" alt=""></a>
+            <a href="index.jsp">
+                <h1>ShareCare</h1>
+            </a>
+        </div>
+        <nav>
+            <a href="../index.jsp" class="nav-link">Home</a>
+            <a href="../request.jsp" class="nav-link">Requests</a>
+            <a href="" class="nav-link">Quam?</a>
+            <a href="" class="nav-link">Placeat!</a>
+            <a href="../login.jsp" class="log-in">Log In</a>
+            <a href="../registro.jsp" class="register">Register</a>
+        </nav>
+    </header>
     <br><br>
     <div class="panel panel-primary">
         <!-- cambio de titulo provisional y test -->

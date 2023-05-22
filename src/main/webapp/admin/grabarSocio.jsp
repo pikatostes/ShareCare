@@ -6,13 +6,10 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
   <title>ShareCare - Administration</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 </head>
 <body>
 <%
@@ -22,22 +19,20 @@
   request.setCharacterEncoding("UTF-8");
 
   // Comprueba la existencia del número de socio introducido
-  String consultaNumSocio = "SELECT * FROM user WHERE id="
-          + Integer.valueOf(request.getParameter("id"));
+  String consultaNumSocio = "SELECT * FROM User WHERE userName='" + request.getParameter("userName") + "'";
 
-  ResultSet numeroDeSocios = s.executeQuery (consultaNumSocio);
+  ResultSet numeroDeSocios = s.executeQuery(consultaNumSocio);
 
-  if (numeroDeSocios.getInt("id") != 0) {
-    out.println("Lo siento, no se ha podido dar de alta, ya existe un socio con el número "
-            + request.getParameter("id") + ".");
+  if (numeroDeSocios.next()) {
+    out.println("Lo siento, no se ha podido dar de alta, ya existe un socio con el nombre de usuario '" + request.getParameter("userName") + "'.");
   } else {
-    String insercion = "INSERT INTO user VALUES (" + Integer.valueOf(request.getParameter("id"))
-            + ", '" + request.getParameter("userName")
+    String insercion = "INSERT INTO User (userName, password, name, phone, email, skill) VALUES ('"
+            + request.getParameter("userName")
             + "', '" + request.getParameter("password")
             + "', '" + request.getParameter("name")
             + "', '" + request.getParameter("phone")
             + "', '" + request.getParameter("email")
-            + "', " + Integer.valueOf(request.getParameter("skill")) + ")";
+            + "', " + Integer.parseInt(request.getParameter("skill")) + ")";
     s.execute(insercion);
     out.println("Socio dado de alta correctamente.");
   }
@@ -45,9 +40,10 @@
 %>
 
 <br>
-<a href="admin.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> Página principal</button>
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+<a href="admin.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> Página principal</a>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>

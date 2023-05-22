@@ -42,7 +42,6 @@
     </div>
     <form method="get" action="admin/grabarSocio.jsp">
         <h1 style="text-align: center;">Register</h1>
-        <label for="id"><input type="number" id="id" name="id" required placeholder="Id"></label>
         <label for="email"><input type="email" id="email" name="email" required placeholder="Email"></label>
         <label for="username"><input type="text" id="username" name="userName" required placeholder="User"></label>
         <label for="password"><input type="password" id="password" name="password" required placeholder="Password"></label>
