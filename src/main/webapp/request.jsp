@@ -41,9 +41,15 @@
                         // Establecer conexión a la base de datos SQLite
                         Connection connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db");
 
-                        // Obtener todas las solicitudes de ayuda
-                        Statement statement = connection.createStatement();
-                        ResultSet resultSet = statement.executeQuery("SELECT * FROM Requests");
+                        // Obtener la categoría de las solicitudes a mostrar
+                        String categoryParam = request.getParameter("category");
+                        int category = Integer.parseInt(categoryParam);
+
+                        // Preparar y ejecutar la consulta para obtener las solicitudes de la categoría especificada
+                        String sql = "SELECT * FROM Requests WHERE skill = ?";
+                        PreparedStatement statement = connection.prepareStatement(sql);
+                        statement.setInt(1, category);
+                        ResultSet resultSet = statement.executeQuery();
 
                         // Recorrer el conjunto de resultados y mostrar las solicitudes de ayuda
                         while (resultSet.next()) {

@@ -1,8 +1,7 @@
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Connection"%>
-<%@ page import="com.daw1.ong01.HelloServlet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.sql.*" %>
+<% Class.forName("org.sqlite.JDBC"); %>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -28,10 +27,10 @@
         </div>
     </div>
     <div class="nav-link">
-        <a href="" id="hammer"><img src="imagen/hammerSaw.png" alt="" height="75px">Carpinteria</a>
-        <a href="" id="lightning"><img src="imagen/lightning.png" alt="" height="75px">Electricidad</a>
-        <a href="" id="water"><img src="imagen/water.png" alt="" height="75px">Fontaneria</a>
-        <a href="" id="garden"><img src="imagen/scissors.png" alt="" height="75px">Jardineria</a>
+        <a href="request.jsp?category=1" id="hammer"><img src="imagen/hammerSaw.png" alt="" height="75px">Carpinteria</a>
+        <a href="request.jsp?category=2" id="lightning"><img src="imagen/lightning.png" alt="" height="75px">Electricidad</a>
+        <a href="request.jsp?category=3" id="water"><img src="imagen/water.png" alt="" height="75px">Fontaneria</a>
+        <a href="request.jsp?category=4" id="garden"><img src="imagen/scissors.png" alt="" height="75px">Jardineria</a>
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
