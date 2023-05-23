@@ -28,7 +28,7 @@
 
     if (rowsInserted > 0) {
       out.println("<h3>Solicitud creada correctamente.</h3>");
-      response.sendRedirect("requests.jsp");
+      response.sendRedirect("request.jsp");
     } else {
       out.println("<h3>Error al crear la solicitud.</h3>");
     }

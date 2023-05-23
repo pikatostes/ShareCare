@@ -28,7 +28,7 @@
         </div>
         <% } else { %>
         <div id="login">
-            <p class="log-in" style="background-color: blue">Hola, <%= session.getAttribute("userName") %>!</p>
+            <a class="log-in" style="background-color: blue" href="profile.jsp">Hola, <%= session.getAttribute("userName") %>!</a>
         </div>
         <% } %>
     </div>

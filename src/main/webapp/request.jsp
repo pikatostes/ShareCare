@@ -20,16 +20,12 @@
         <nav>
             <a href="index.jsp" class="nav-link"><img src="imagen/home.png" alt="Home" style="height: 4em"></a>
             <a href="" class="nav-link"><img src="imagen/request.png" alt="Requests" style="height: 4em"> </a>
-            <a href="" class="nav-link">Quam?</a>
-            <a href="" class="nav-link">Placeat!</a>
             <% if (session.getAttribute("userName") == null) { %>
-                <a href="login.jsp" class="log-in">Log In</a>
-                <a href="registro.jsp" class="register">Register</a>
+            <a href="login.jsp" class="log-in">Log In</a>
+            <a href="registro.jsp" class="register">Register</a>
             <% } else { %>
-                <a href="profile.jsp" class="log-in" style="background-color: blue">Perfil</a>
-            </div>
+            <a class="log-in" style="background-color: blue" href="profile.jsp">Hola, <%= session.getAttribute("userName") %>!</a>
             <% } %>
-
         </nav>
     </header>
 

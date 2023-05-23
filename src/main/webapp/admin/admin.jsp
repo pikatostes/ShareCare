@@ -36,7 +36,7 @@
     <br><br>
     <div class="panel panel-primary">
         <!-- cambio de titulo provisional y test -->
-        <div class="panel-heading text-center"><h2>ShareCare - Administration</h2></div>
+        <div class="panel-heading text-center" style="background-color: whitesmoke"><h2>ShareCare - Administration</h2></div>
             <%
               Connection conexion = HelloServlet.connect();
               Statement s = conexion.createStatement();

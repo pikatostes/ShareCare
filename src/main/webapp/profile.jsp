@@ -16,11 +16,14 @@
         </div>
         <nav>
             <a href="index.jsp" class="nav-link">Home</a>
-            <a href="" class="nav-link">Help someone</a>
-            <a href="" class="nav-link">Quam?</a>
-            <a href="" class="nav-link">Placeat!</a>
+            <a href="request.jsp" class="nav-link">Help someone</a>
+            <% if (session.getAttribute("userName") == null) { %>
             <a href="login.jsp" class="log-in">Log In</a>
             <a href="registro.jsp" class="register">Register</a>
+            <% } else { %>
+            <a class="log-in" style="background-color: blue" href="profile.jsp">Hola, <%= session.getAttribute("userName") %>!</a>
+            <a href="logout.jsp" class="log-in">Cerrar Sesión</a> <!-- Botón de cierre de sesión -->
+            <% } %>
         </nav>
     </header>
 
@@ -31,20 +34,24 @@
             </div>
             <div class="info">
                 <h2>Edit info</h2>
-                <form action="post">
+                <form action="profileChange.jsp" method="post">
                     <label for="email"><input type="email" name="email" id="email" placeholder="email"></label>
                     <label for="user"><input type="text" name="user" id="user" placeholder="user"></label>
-                    <label for="password"><input type="password" name="password" id="password"
-                                                 placeholder="password"></label>
+                    <label for="password"><input type="password" name="password" id="password" placeholder="password"></label>
+                    <label for="role">Role:</label>
+                    <select name="role" id="role">
+                        <option value="0">Solicitante</option>
+                        <option value="1">Contribuidor</option>
+                    </select>
                     <div class="options">
                         <input type="submit" value="Change">
                         <input type="reset" value="Revert">
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
 </div>
-</body>
 </body>
 </html>
