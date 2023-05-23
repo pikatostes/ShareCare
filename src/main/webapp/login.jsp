@@ -23,7 +23,7 @@
             <h1>ShareCare</h1>
         </a>
     </div>
-    <form action="loginCheck.jsp" method="post">
+    <form action="jsp/loginCheck.jsp" method="post">
         <h1 style="text-align: center;">Log In</h1>
         <label for="userName"><input type="text" id="userName" name="userName" required placeholder="User"></label>
         <label for="password"><input type="password" id="password" name="password" required placeholder="Password"></label>

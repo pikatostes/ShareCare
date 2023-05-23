@@ -43,7 +43,7 @@
               ResultSet listado = s.executeQuery ("SELECT * FROM user ORDER BY 1");
             %>
         <table class="table table-striped">
-            <tr><th>ID</th><th>Username</th><th>Contraseña</th><th>Nombre</th><th>Telefono</th><th>Correo</th><th>Skill</th></tr>
+            <tr><th>ID</th><th>Username</th><th>Contraseña</th><th>Nombre</th><th>Telefono</th><th>Correo</th><th>Skill</th><th>Contributor</th></tr>
             <form method="get" action="grabarSocio.jsp">
                 <tr><td><input type="text" name="id" size="4"></td>
                     <td><input type="text" name="userName" size="8"></td>
@@ -52,6 +52,7 @@
                     <td><input type="text" name="phone" size="9"></td>
                     <td><input type="text" name="email" size="18"></td>
                     <td><input type="text" name="skill" size="4"></td>
+                    <td><input type="number" name="contributor" size="4"></td>
                     <td><button type="submit" value="Añadir" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Añadir</button></td><td></td></tr>
             </form>
             <%
@@ -64,6 +65,7 @@
                     out.println("<td>" + listado.getString("phone") + "</td>");
                     out.println("<td>" + listado.getString("email") + "</td>");
                     out.println("<td>" + listado.getString("skill") + "</td>");
+                    out.println("<td>" + listado.getString("contributor") + "</td>");
             %>
             <td>
                 <form method="get" action="modificarSocio.jsp">
@@ -74,6 +76,7 @@
                     <input type="hidden" name="phone" value="<%=listado.getString("phone") %>">
                     <input type="hidden" name="email" value="<%=listado.getString("email") %>">
                     <input type="hidden" name="skill" value="<%=listado.getString("skill") %>">
+                    <input type="hidden" name="contributor" value="<%=listado.getString("contributor") %>">
                     <button type="submit"  class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Modificar</button>
                 </form>
             </td>

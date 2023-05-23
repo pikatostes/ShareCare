@@ -43,13 +43,14 @@
   if (numeroDeSocios.next()) {
     out.println("Lo siento, no se ha podido dar de alta, ya existe un socio con el nombre de usuario '" + request.getParameter("userName") + "'.");
   } else {
-    String insercion = "INSERT INTO User (userName, password, name, phone, email, skill) VALUES ('"
+    String insercion = "INSERT INTO User (userName, password, name, phone, email, skill, contributor) VALUES ('"
             + request.getParameter("userName")
             + "', '" + request.getParameter("password")
             + "', '" + request.getParameter("name")
             + "', '" + request.getParameter("phone")
             + "', '" + request.getParameter("email")
-            + "', " + Integer.parseInt(request.getParameter("skill")) + ")";
+            + "', '" + request.getParameter("skill")
+            + "', " + Integer.parseInt(request.getParameter("contributor")) + ")";
     s.execute(insercion);
     out.println("Socio dado de alta correctamente.");
   }

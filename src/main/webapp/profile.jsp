@@ -1,9 +1,10 @@
+<%@ page import="java.sql.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>ShareCare - Profile</title>
-    <link rel="stylesheet" href="estiloProfile.css">
+    <link rel="stylesheet" href="styleProfile.css">
 </head>
 <body>
 <div id="container">
@@ -22,7 +23,7 @@
             <a href="registro.jsp" class="register">Register</a>
             <% } else { %>
             <a class="log-in" style="background-color: blue" href="profile.jsp">Hola, <%= session.getAttribute("userName") %>!</a>
-            <a href="logout.jsp" class="log-in">Cerrar Sesión</a> <!-- Botón de cierre de sesión -->
+            <a href="logout.jsp" class="log-in" style="background-color: red">Cerrar Sesión</a> <!-- Botón de cierre de sesión -->
             <% } %>
         </nav>
     </header>
@@ -34,10 +35,10 @@
             </div>
             <div class="info">
                 <h2>Edit info</h2>
-                <form action="profileChange.jsp" method="post">
+                <form action="jsp/profileChange.jsp" method="post">
                     <label for="email"><input type="email" name="email" id="email" placeholder="email"></label>
                     <label for="user"><input type="text" name="user" id="user" placeholder="user"></label>
-                    <label for="password"><input type="password" name="password" id="password" placeholder="password"></label>
+                    <label for="password"><input type="password" name="password" id="password" placeholder="<%= session.getAttribute("userName") %>"></label>
                     <label for="role">Role:</label>
                     <select name="role" id="role">
                         <option value="0">Solicitante</option>
@@ -51,6 +52,80 @@
 
             </div>
         </div>
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Category</th>
+                <th>User</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+                // Obtener el nombre de usuario de la sesión
+                String userName = (String) session.getAttribute("userName");
+
+                try {
+                    // Establecer conexión a la base de datos SQLite
+                    Connection connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db");
+
+                    // Preparar y ejecutar la consulta para obtener las solicitudes del usuario actual
+                    String sql = "SELECT * FROM Requests WHERE User = ?";
+                    PreparedStatement statement = connection.prepareStatement(sql);
+                    statement.setString(1, userName);
+                    ResultSet resultSet = statement.executeQuery();
+
+                    // Mostrar las solicitudes del usuario
+                    while (resultSet.next()) {
+                        // Obtener los detalles de la solicitud
+                        int requestID = resultSet.getInt("ID");
+                        int skill = resultSet.getInt("skill");
+                        String user = resultSet.getString("User");
+                        String requestDescription = resultSet.getString("Description");
+
+                        String skillString = String.valueOf(skill);
+
+                        switch (skill) {
+                            case 1:
+                                skillString = "Carpinteria";
+                                break;
+                            case 2:
+                                skillString = "Electricidad";
+                                break;
+                            case 3:
+                                skillString = "Fontaneria";
+                                break;
+                            case 4:
+                                skillString = "Jardineria";
+                                break;
+                        }
+
+                        // Mostrar los detalles de la solicitud en la tabla
+                        out.println("<tr>");
+                        out.println("<td>" + skillString + "</td>");
+                        out.println("<td>" + user + "</td>");
+                        out.println("<td>" + requestDescription + "</td>");
+                        out.println("<td>");
+                        out.println("<button class=\"chat-button\">Chat</button>");
+                        out.println("<form action=\"deleteRequests.jsp\" method=\"post\">");
+                        out.println("<input type=\"hidden\" name=\"id\" value=\"" + requestID + "\">");
+                        out.println("<input type=\"submit\" value=\"Eliminar\" class=\"delete-button\">");
+                        out.println("</form>");
+                        out.println("</td>");
+                        out.println("</tr>");
+                    }
+
+                    // Cerrar la conexión y liberar los recursos
+                    resultSet.close();
+                    statement.close();
+                    connection.close();
+                } catch (SQLException e) {
+                    out.println("Error al conectar a la base de datos: " + e.getMessage());
+                }
+            %>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>
