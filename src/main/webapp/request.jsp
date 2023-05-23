@@ -18,12 +18,18 @@
             </a>
         </div>
         <nav>
-            <a href="index.jsp" class="nav-link">Home</a>
-            <a href="" class="nav-link">Help someone</a>
+            <a href="index.jsp" class="nav-link"><img src="imagen/home.png" alt="Home" style="height: 4em"></a>
+            <a href="" class="nav-link"><img src="imagen/request.png" alt="Requests" style="height: 4em"> </a>
             <a href="" class="nav-link">Quam?</a>
             <a href="" class="nav-link">Placeat!</a>
-            <a href="login.jsp" class="log-in">Log In</a>
-            <a href="registro.jsp" class="register">Register</a>
+            <% if (session.getAttribute("userName") == null) { %>
+                <a href="login.jsp" class="log-in">Log In</a>
+                <a href="registro.jsp" class="register">Register</a>
+            <% } else { %>
+                <a href="profile.jsp" class="log-in" style="background-color: blue">Perfil</a>
+            </div>
+            <% } %>
+
         </nav>
     </header>
 
@@ -117,7 +123,7 @@
         <div id="createHelp">
             <h2>Crear nueva solicitud de ayuda:</h2>
             <form action="crear-solicitud.jsp" method="post">
-                <label  for="categoria">Categoria:</label>
+                <label for="categoria">Categoría:</label>
                 <select name="categoria" id="categoria">
                     <option value="1">Carpintería</option>
                     <option value="2">Electricidad</option>
@@ -125,7 +131,7 @@
                     <option value="4">Jardinería</option>
                 </select><br>
                 <label for="usuario">Usuario:</label>
-                <input type="text" name="usuario" id="usuario"><br>
+                <input type="text" name="usuario" id="usuario" value="<%= session.getAttribute("userName") %>"><br>
                 <label for="descripcion">Descripción:</label>
                 <textarea name="descripcion" id="descripcion" rows="3"></textarea><br>
                 <input type="submit" value="Enviar solicitud">

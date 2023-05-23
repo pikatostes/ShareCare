@@ -16,42 +16,6 @@
     <link rel="stylesheet" href="estiloLog.css">
 </head>
 <body>
-<%
-    String username = request.getParameter("username");
-    String password = request.getParameter("password");
-
-    try {
-        // Establecer conexión a la base de datos SQLite
-        Connection connection = HelloServlet.connect();
-
-        // Verificar las credenciales del usuario
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM user WHERE userName = ? AND password = ?");
-        statement.setString(1, username);
-        statement.setString(2, password);
-        ResultSet resultSet = statement.executeQuery();
-
-        String userNameParam = null;
-        if (resultSet.next()) {
-            // Credenciales válidas, redirigir al usuario a la página de éxito
-            response.sendRedirect("profile.jsp");
-        } userNameParam = request.getParameter("userName");
-        if (userNameParam != null && userNameParam.equals("admin")) {
-            response.sendRedirect("./admin/admin.jsp");
-        } else {
-            // Credenciales inválidas, mostrar mensaje de error
-            out.println("Credenciales inválidas. Por favor, intente nuevamente.");
-        }
-
-        // Cerrar la conexión y liberar los recursos
-        resultSet.close();
-        statement.close();
-        connection.close();
-    } catch (Exception e) {
-        // Manejar cualquier excepción
-        out.println("Error: " + e.getMessage());
-    }
-%>
-
 <div id="container">
     <div class="logo">
         <a href="index.jsp"><img src="imagen/solidarity.avif" alt=""></a>
@@ -59,7 +23,7 @@
             <h1>ShareCare</h1>
         </a>
     </div>
-    <form action="" method="post">
+    <form action="loginCheck.jsp" method="post">
         <h1 style="text-align: center;">Log In</h1>
         <label for="userName"><input type="text" id="userName" name="userName" required placeholder="User"></label>
         <label for="password"><input type="password" id="password" name="password" required placeholder="Password"></label>

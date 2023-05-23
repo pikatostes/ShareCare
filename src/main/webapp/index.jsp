@@ -21,10 +21,16 @@
         <a href="index.jsp">
             <h1>ShareCare</h1>
         </a>
+        <% if (session.getAttribute("userName") == null) { %>
         <div id="login">
             <a href="login.jsp" class="log-in">Log In</a>
             <a href="registro.jsp" class="register">Register</a>
         </div>
+        <% } else { %>
+        <div id="login">
+            <p class="log-in" style="background-color: blue">Hola, <%= session.getAttribute("userName") %>!</p>
+        </div>
+        <% } %>
     </div>
     <div class="nav-link">
         <a href="request.jsp?category=1" id="hammer"><img src="imagen/hammerSaw.png" alt="" height="75px">Carpinteria</a>
