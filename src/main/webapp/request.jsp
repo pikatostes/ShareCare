@@ -132,7 +132,7 @@
         </div>
         <div id="createHelp">
             <h2>Crear nueva solicitud de ayuda:</h2>
-            <form action="jsp/crear-solicitud.jsp" method="post">
+            <form action="crear-solicitud.jsp" method="post">
                 <label for="categoria">Categoría:</label>
                 <select name="categoria" id="categoria">
                     <option value="1">Carpintería</option>
