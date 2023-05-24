@@ -25,6 +25,10 @@
             <a href="index.jsp">
                 <h1>ShareCare</h1>
             </a>
+            <div>
+                <button onclick="showRequests()">My Requests</button>
+                <button onclick="showAcceptedRequests()">Accepted Requests</button>
+            </div>
         </div>
         <nav>
             <a href="index.jsp" class="nav-link">Home</a>
@@ -60,7 +64,6 @@
                         <input type="reset" value="Revert">
                     </div>
                 </form>
-
             </div>
         </div>
         <table id="myRequests" class="styled-table">
@@ -131,8 +134,6 @@
                             out.println("<input type=\"hidden\" name=\"requestID\" value=\"" + requestID + "\">");
                             out.println("<input type=\"submit\" value=\"Más info\" class=\"more-info-button\">");
                             out.println("</form>");
-                        } else {
-                            out.println("<button class=\"chat-button\">Chat</button>");
                         }
                         out.println("<form action=\"deleteRequests.jsp\" method=\"post\">");
                         out.println("<input type=\"hidden\" name=\"id\" value=\"" + requestID + "\">");
@@ -228,10 +229,6 @@
             %>
             </tbody>
         </table>
-        <div>
-            <button onclick="showRequests()">My Requests</button>
-            <button onclick="showAcceptedRequests()">Accepted Requests</button>
-        </div>
     </div>
 </div>
 </body>
