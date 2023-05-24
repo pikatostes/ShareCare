@@ -69,6 +69,9 @@
                 <th>Category</th>
                 <th>User</th>
                 <th>Description</th>
+                <th>Date</th>
+                <th>Estate</th>
+                <th>Contributor</th>
                 <th></th>
             </tr>
             </thead>
@@ -94,9 +97,11 @@
                         int skill = resultSet.getInt("skill");
                         String user = resultSet.getString("User");
                         String requestDescription = resultSet.getString("Description");
+                        String date = resultSet.getString("Date");
+                        boolean accepted = resultSet.getBoolean("accepted");
+                        String contributor = resultSet.getString("contributor");
 
-                        String skillString = String.valueOf(skill);
-
+                        String skillString = "";
                         switch (skill) {
                             case 1:
                                 skillString = "Carpinteria";
@@ -117,6 +122,9 @@
                         out.println("<td>" + skillString + "</td>");
                         out.println("<td>" + user + "</td>");
                         out.println("<td>" + requestDescription + "</td>");
+                        out.println("<td>" + date + "</td>");
+                        out.println("<td>" + (accepted ? "Aceptada" : "Pendiente") + "</td>");
+                        out.println("<td>" + contributor + "</td>");
                         out.println("<td>");
                         out.println("<button class=\"chat-button\">Chat</button>");
                         out.println("<form action=\"deleteRequests.jsp\" method=\"post\">");
@@ -144,6 +152,7 @@
                 <th>Category</th>
                 <th>User</th>
                 <th>Description</th>
+                <th>Date</th>
                 <th></th>
             </tr>
             </thead>
