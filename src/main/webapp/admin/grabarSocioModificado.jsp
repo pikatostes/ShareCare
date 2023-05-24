@@ -26,7 +26,8 @@
           + "', phone='" + request.getParameter("phone")
           + "', email='" + request.getParameter("email")
           + "', skill=" + Integer.valueOf(request.getParameter("skill"))
-          + " WHERE id=" + Integer.valueOf(request.getParameter("id"));
+          + ", contributor='" + request.getParameter("contributor")
+          + "' WHERE id=" + Integer.valueOf(request.getParameter("id"));
   s.execute(actualizacion);
   out.println("Socio actualizado correctamente.");
 

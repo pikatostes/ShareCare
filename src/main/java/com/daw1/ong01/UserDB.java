@@ -1,12 +1,13 @@
 package com.daw1.ong01;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
+        import java.sql.Connection;
+        import java.sql.DriverManager;
+        import java.sql.PreparedStatement;
+        import java.sql.SQLException;
 
 public class UserDB {
 
-    private static final String DB_URL = "jdbc:sqlite:project.db";
+    private static final String DB_URL = "jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db";
 
     public static boolean insertUser(String userName, String password, String name, String phone, String email, int skill) {
         try (Connection conn = DriverManager.getConnection(DB_URL);

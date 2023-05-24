@@ -40,7 +40,7 @@
             <h1>ShareCare</h1>
         </a>
     </div>
-    <form method="get" action="admin/grabarSocio.jsp">
+    <form method="get" action="registro.jsp">
         <h1 style="text-align: center;">Register</h1>
         <label for="email"><input type="email" id="email" name="email" required placeholder="Email"></label>
         <label for="username"><input type="text" id="username" name="userName" required placeholder="User"></label>
