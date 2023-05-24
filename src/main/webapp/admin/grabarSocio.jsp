@@ -2,6 +2,8 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Connection"%>
 <%@ page import="com.daw1.ong01.HelloServlet" %>
+<%@ page import="com.daw1.ong01.User" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -30,31 +32,30 @@
   </nav>
 </header>
 <%
-  Connection conexion = HelloServlet.connect();
-  Statement s = conexion.createStatement();
-
-  request.setCharacterEncoding("UTF-8");
-
-  // Comprueba la existencia del número de socio introducido
-  String consultaNumSocio = "SELECT * FROM User WHERE userName='" + request.getParameter("userName") + "'";
-
-  ResultSet numeroDeSocios = s.executeQuery(consultaNumSocio);
-
-  if (numeroDeSocios.next()) {
-    out.println("Lo siento, no se ha podido dar de alta, ya existe un socio con el nombre de usuario '" + request.getParameter("userName") + "'.");
-  } else {
-    String insercion = "INSERT INTO User (userName, password, name, phone, email, skill, contributor) VALUES ('"
-            + request.getParameter("userName")
-            + "', '" + request.getParameter("password")
-            + "', '" + request.getParameter("name")
-            + "', '" + request.getParameter("phone")
-            + "', '" + request.getParameter("email")
-            + "', '" + request.getParameter("skill")
-            + "', " + Integer.parseInt(request.getParameter("contributor")) + ")";
-    s.execute(insercion);
-    out.println("Socio dado de alta correctamente.");
+  // meter parameters
+  User alex = new User(
+          request.getParameter("userName"),
+          request.getParameter("password"),
+          request.getParameter("phone"),
+          request.getParameter("email"),
+          request.getParameter("skill"),
+          Integer.parseInt(request.getParameter("contributor"))
+  );
+  ResultSet numeroDeSocios = null;
+  try {
+    if (numeroDeSocios.next()) {
+      out.println("Lo siento, no se ha podido dar de alta, ya existe un socio con el nombre de usuario '" + request.getParameter("userName") + "'.");
+    } else {
+      try {
+        alex.saveUser();
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
+      out.println("Socio dado de alta correctamente.");
+    }
+  } catch (SQLException e) {
+    throw new RuntimeException(e);
   }
-  conexion.close();
 %>
 
 <br>
