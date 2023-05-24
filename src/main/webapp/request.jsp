@@ -21,8 +21,8 @@
             </a>
         </div>
         <nav>
-            <a href="index.jsp" class="nav-link"><img src="imagen/home.png" alt="Home" style="height: 2em"></a>
-            <a href="" class="nav-link"><img src="imagen/request.png" alt="Requests" style="height: 2em"></a>
+            <a href="index.jsp" class="nav-link">Home</a>
+            <a href="" class="nav-link">Requests Page</a>
             <% if (session.getAttribute("userName") == null) { %>
             <a href="login.jsp" class="log-in">Log In</a>
             <a href="registro.jsp" class="register">Register</a>
@@ -58,7 +58,7 @@
                     List<Request> requests = Requests.getAllRequests();
                     int filterCategory = 0; // Valor predeterminado para mostrar todas las solicitudes
 
-// Verificar si se ha enviado el parámetro "category"
+                    // Verificar si se ha enviado el parámetro "category"
                     String categoryParam = request.getParameter("category");
                     if (categoryParam != null && !categoryParam.isEmpty()) {
                         try {
@@ -68,6 +68,8 @@
                             e.printStackTrace();
                         }
                     }
+
+                    String currentUser = (String) session.getAttribute("userName");
 
                     for (Request req : requests) {
                         // Obtener los detalles de la solicitud
@@ -89,15 +91,18 @@
                                 out.println("<td>" + descripcion + "</td>");
                                 out.println("<td>" + fecha + "</td>");
                                 out.println("<td>");
-                                out.println("<form action=\"acceptRequest.jsp\" method=\"post\">");
-                                out.println("<input type=\"hidden\" name=\"requestID\" value=\"" + requestID + "\">");
-                                out.println("<input type=\"hidden\" name=\"acceptedBy\" value=\"" + session.getAttribute("userName") + "\">");
-                                out.println("<input type=\"submit\" value=\"Aceptar\" class=\"accept-button\">");
-                                out.println("</form>");
+                                if (!usuario.equals(currentUser)) {
+                                    out.println("<form action=\"acceptRequest.jsp\" method=\"post\">");
+                                    out.println("<input type=\"hidden\" name=\"requestID\" value=\"" + requestID + "\">");
+                                    out.println("<input type=\"hidden\" name=\"acceptedBy\" value=\"" + session.getAttribute("userName") + "\">");
+                                    out.println("<input type=\"submit\" value=\"Aceptar\" class=\"accept-button\">");
+                                    out.println("</form>");
+                                }
                                 out.println("</td>");
                                 out.println("</tr>");
                             }
                         }
+
                     }
                 %>
             </table>

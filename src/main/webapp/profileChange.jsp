@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
-<%@ page import="com.daw1.ong01.HelloServlet" %>
 <%@ page import="java.util.List, java.util.ArrayList" %>
 <%
     // Obtener los valores enviados desde el formulario
     String email = request.getParameter("email");
-    String user = request.getParameter("user");
     String password = request.getParameter("password");
     String roleString = request.getParameter("role");
 
@@ -31,10 +29,6 @@
             if (email != null) {
                 updateSqlBuilder.append(" email = ?,");
                 updateParams.add(email);
-            }
-            if (user != null) {
-                updateSqlBuilder.append(" name = ?,");
-                updateParams.add(user);
             }
             if (password != null) {
                 updateSqlBuilder.append(" password = ?,");
@@ -65,8 +59,8 @@
                 updateStatement.close();
 
                 // Actualizar el nombre de usuario en la sesión si se actualizó el campo correspondiente
-                if (user != null) {
-                    session.setAttribute("userName", user);
+                if (password != null) {
+                    session.setAttribute("userName", password);
                 }
 
                 out.println("Datos de usuario actualizados exitosamente.");

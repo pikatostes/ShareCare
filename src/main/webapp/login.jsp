@@ -29,7 +29,6 @@
         <label for="password"><input type="password" id="password" name="password" required placeholder="Password"></label>
         <div class="links">
             <a href="registro.jsp">Don't have an account?</a>
-            <a href="">Forgotten password</a>
         </div>
         <input type="submit" value="Log In">
     </form>

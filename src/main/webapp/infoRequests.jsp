@@ -76,20 +76,60 @@
                     out.println("<p><strong>Descripción:</strong> " + requestDescription + "</p>");
                     out.println("<p><strong>Fecha:</strong> " + date + "</p>");
                     out.println("<p><strong>Estado:</strong> " + (accepted ? "Aceptada" : "Pendiente") + "</p>");
-                    out.println("<p><strong>Contribuidor:</strong> " + contributor + "</p>");
 
-                    // Si la solicitud está aceptada, mostrar el botón para finalizar la solicitud
-                    if (accepted) {
-                        out.println("<form action=\"deleteRequests.jsp\" method=\"post\">");
-                        out.println("<input type=\"hidden\" name=\"requestID\" value=\"" + requestID + "\">");
-                        out.println("<input type=\"submit\" value=\"Finalizar Solicitud\" class=\"finish-request-button\">");
-                        out.println("</form>");
+                    // Consultar la habilidad del contribuidor
+                    String contributorSkill = "";
+                    String contributorSql = "SELECT skill FROM User WHERE userName = ?";
+                    PreparedStatement contributorStatement = connection.prepareStatement(contributorSql);
+                    contributorStatement.setString(1, contributor);
+                    ResultSet contributorResultSet = contributorStatement.executeQuery();
+                    if (contributorResultSet.next()) {
+                        int contributorSkillID = contributorResultSet.getInt("skill");
+                        switch (contributorSkillID) {
+                            case 1:
+                                contributorSkill = "Carpinteria";
+                                break;
+                            case 2:
+                                contributorSkill = "Electricidad";
+                                break;
+                            case 3:
+                                contributorSkill = "Fontaneria";
+                                break;
+                            case 4:
+                                contributorSkill = "Jardineria";
+                                break;
+                        }
                     }
+                    out.println("<br>");
+                    out.println("<p><strong>Contribuidor:</strong> " + contributor + "</p>");
+                    out.println("<p><strong>Habilidad del contribuidor:</strong> " + contributorSkill + "</p>");
+
+                    // Verificar si el usuario de la sesión es el mismo que el solicitante
+                    if (session.getAttribute("userName") != null && session.getAttribute("userName").equals(user)) {
+                        // Si la solicitud está aceptada, mostrar los botones para finalizar la solicitud y volver a pendiente
+                        if (accepted) {
+                            out.println("<form action=\"updateRequests.jsp\" method=\"post\">");
+                            out.println("<input type=\"hidden\" name=\"requestID\" value=\"" + requestID + "\">");
+                            out.println("<input type=\"hidden\" name=\"action\" value=\"removeContributor\">");
+                            out.println("<input type=\"submit\" value=\"Quitar Contribuidor\" class=\"remove-contributor-button\">");
+                            out.println("</form>");
+
+                            out.println("<form action=\"deleteRequests.jsp\" method=\"post\">");
+                            out.println("<input type=\"hidden\" name=\"id\" value=\"" + requestID + "\">");
+                            out.println("<input type=\"hidden\" name=\"action\" value=\"setPending\">");
+                            out.println("<input type=\"submit\" value=\"Volver a Pendiente\" class=\"set-pending-button\">");
+                            out.println("</form>");
+                        }
+                    }
+
+                    // Cerrar la conexión y liberar los recursos de la consulta del contribuidor
+                    contributorResultSet.close();
+                    contributorStatement.close();
                 } else {
                     out.println("<p>No se encontraron detalles para la solicitud.</p>");
                 }
 
-                // Cerrar la conexión y liberar los recursos
+                // Cerrar la conexión y liberar los recursos de la consulta de la solicitud
                 resultSet.close();
                 statement.close();
                 connection.close();

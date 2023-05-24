@@ -25,14 +25,10 @@
             <a href="index.jsp">
                 <h1>ShareCare</h1>
             </a>
-            <div>
-                <button onclick="showRequests()">My Requests</button>
-                <button onclick="showAcceptedRequests()">Accepted Requests</button>
-            </div>
         </div>
         <nav>
             <a href="index.jsp" class="nav-link">Home</a>
-            <a href="request.jsp" class="nav-link">Help someone</a>
+            <a href="request.jsp" class="nav-link">Requests Page</a>
             <% if (session.getAttribute("userName") == null) { %>
             <a href="login.jsp" class="log-in">Log In</a>
             <a href="registro.jsp" class="register">Register</a>
@@ -52,7 +48,6 @@
                 <h2>Edit info</h2>
                 <form action="profileChange.jsp" method="post">
                     <label for="email"><input type="email" name="email" id="email" placeholder="email"></label>
-                    <label for="user"><input type="text" name="user" id="user" placeholder="user"></label>
                     <label for="password"><input type="password" name="password" id="password" placeholder="<%= session.getAttribute("userName") %>"></label>
                     <label for="role">Role:</label>
                     <select name="role" id="role">
@@ -137,7 +132,7 @@
                         }
                         out.println("<form action=\"deleteRequests.jsp\" method=\"post\">");
                         out.println("<input type=\"hidden\" name=\"id\" value=\"" + requestID + "\">");
-                        out.println("<input type=\"submit\" value=\"Eliminar\" class=\"delete-button\">");
+                        out.println("<input type=\"submit\" value=\"Eliminar\" class=\"delete-button\" style=\"background-color: red\">");
                         out.println("</form>");
                         out.println("</td>");
                         out.println("</tr>");
@@ -229,6 +224,10 @@
             %>
             </tbody>
         </table>
+        <div>
+            <button onclick="showRequests()">My Requests</button>
+            <button onclick="showAcceptedRequests()">Accepted Requests</button>
+        </div>
     </div>
 </div>
 </body>
