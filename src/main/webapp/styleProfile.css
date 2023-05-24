@@ -206,3 +206,10 @@ input[type="reset"] {
     border: none;
     padding: 5px 10px;
 }
+
+#main {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    height: 100vh;
+}

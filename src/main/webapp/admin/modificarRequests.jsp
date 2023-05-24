@@ -13,10 +13,29 @@
 <body>
 <% request.setCharacterEncoding("UTF-8"); %>
 <div class="container">
+  <header>
+    <div class="logo">
+      <a href="index.jsp"><img src="imagen/solidarity.avif" alt=""></a>
+      <a href="index.jsp">
+        <h1>ShareCare</h1>
+      </a>
+    </div>
+    <nav>
+      <a href="index.jsp" class="nav-link">Home</a>
+      <a href="request.jsp" class="nav-link">Help someone</a>
+      <% if (session.getAttribute("userName") == null) { %>
+      <a href="login.jsp" class="log-in">Log In</a>
+      <a href="registro.jsp" class="register">Register</a>
+      <% } else { %>
+      <a class="log-in" style="background-color: blue" href="profile.jsp">Hola, <%= session.getAttribute("userName") %>!</a>
+      <a href="logout.jsp" class="log-in" style="background-color: red">Cerrar Sesión</a> <!-- Botón de cierre de sesión -->
+      <% } %>
+    </nav>
+  </header>
   <br><br>
   <div class="panel panel-info">
     <div class="panel-heading text-center">Modificación de solicitación</div>
-    <form method="get" action="grabarRequestsModificado.jsp">
+    <form method="post" action="grabarRequestsModificado.jsp">
       <div class="form-group">
         <label>&nbsp;&nbsp;ID:&nbsp;</label><input type="text" size="5" name="ID" value="<%= request.getParameter("ID") %>" readonly>
       </div>

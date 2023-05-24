@@ -30,7 +30,7 @@
           + "' WHERE id=" + Integer.valueOf(request.getParameter("id"));
   s.execute(actualizacion);
   out.println("Socio actualizado correctamente.");
-
+  response.sendRedirect("admin.jsp");
   conexion.close();
 %>
 <br>

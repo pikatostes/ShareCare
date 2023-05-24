@@ -29,11 +29,11 @@
           + "' WHERE ID=" + Integer.valueOf(request.getParameter("ID"));
   s.execute(actualizacion);
   out.println("Solicitud actualizado correctamente.");
-
+  response.sendRedirect("requests.jsp");
   conexion.close();
 %>
 <br>
-<a href="requests.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> Página principal</button>
+<a href="requests.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> Página principal</a>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>

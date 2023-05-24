@@ -41,6 +41,7 @@
     s.execute(insercion);
     out.println("Solicitud dado de alta correctamente.");
   }
+  response.sendRedirect("requests.jsp");
   conexion.close();
 %>
 

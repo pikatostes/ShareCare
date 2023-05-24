@@ -126,7 +126,14 @@
                         out.println("<td>" + (accepted ? "Aceptada" : "Pendiente") + "</td>");
                         out.println("<td>" + contributor + "</td>");
                         out.println("<td>");
-                        out.println("<button class=\"chat-button\">Chat</button>");
+                        if (accepted) {
+                            out.println("<form action=\"infoRequests.jsp\" method=\"post\">");
+                            out.println("<input type=\"hidden\" name=\"requestID\" value=\"" + requestID + "\">");
+                            out.println("<input type=\"submit\" value=\"Más info\" class=\"more-info-button\">");
+                            out.println("</form>");
+                        } else {
+                            out.println("<button class=\"chat-button\">Chat</button>");
+                        }
                         out.println("<form action=\"deleteRequests.jsp\" method=\"post\">");
                         out.println("<input type=\"hidden\" name=\"id\" value=\"" + requestID + "\">");
                         out.println("<input type=\"submit\" value=\"Eliminar\" class=\"delete-button\">");
@@ -199,7 +206,10 @@
                         out.println("<td>" + user + "</td>");
                         out.println("<td>" + requestDescription + "</td>");
                         out.println("<td>");
-                        out.println("<button class=\"chat-button\">Chat</button>");
+                        out.println("<form action=\"infoRequests.jsp\" method=\"post\">");
+                        out.println("<input type=\"hidden\" name=\"requestID\" value=\"" + requestID + "\">");
+                        out.println("<input type=\"submit\" value=\"Más info\" class=\"more-info-button\">");
+                        out.println("</form>");
                         out.println("<form action=\"deleteAcceptedRequests.jsp\" method=\"post\">");
                         out.println("<input type=\"hidden\" name=\"id\" value=\"" + requestID + "\">");
                         out.println("<input type=\"submit\" value=\"Eliminar\" class=\"delete-button\">");

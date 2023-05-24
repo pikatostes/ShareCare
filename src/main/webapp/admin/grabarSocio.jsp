@@ -43,6 +43,7 @@
     s.execute(insercion);
     out.println("Socio dado de alta correctamente.");
   }
+  response.sendRedirect("admin.jsp");
   conexion.close();
 %>
 
