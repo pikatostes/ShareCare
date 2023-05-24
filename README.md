@@ -6,6 +6,15 @@ El principal objetivo del proyecto era crear una plataforma llamada ShareCare en
 
 El objetivo principal del proyecto era desarrollar ShareCare, una plataforma donde los usuarios pueden registrarse, crear solicitudes de ayuda y otros usuarios con habilidades relevantes pueden aceptar y proporcionar asistencia. El enfoque de la plataforma es brindar apoyo a personas mayores.
 
+## Lenguajes Utilizados
+
+Los lenguajes de programación utilizados en el proyecto, en orden de mayor presencia en el código, son:
+
+- JSP (Java Server Pages): Para la lógica del servidor y la generación de contenido dinámico.
+- CSS (Cascading Style Sheets): Para el diseño y la presentación visual de las páginas web.
+- HTML (HyperText Markup Language): Para la estructura y el marcado de las páginas web.
+- JavaScript: Para agregar interactividad y funcionalidades adicionales en el cliente.
+
 ## Componentes Principales
 
 Los componentes principales del proyecto son:
@@ -20,25 +29,44 @@ Los componentes principales del proyecto son:
 
 ## Clases
 
-Se han creado dos clases diferentes:
-- <a href="src/main/java/com/daw1/ong01/User.java">`User.java`</a>:
-
-## Lenguajes Utilizados
-
-Los lenguajes de programación utilizados en el proyecto, en orden de mayor presencia en el código, son:
-
-- JSP (Java Server Pages): Para la lógica del servidor y la generación de contenido dinámico.
-- CSS (Cascading Style Sheets): Para el diseño y la presentación visual de las páginas web.
-- HTML (HyperText Markup Language): Para la estructura y el marcado de las páginas web.
-- JavaScript: Para agregar interactividad y funcionalidades adicionales en el cliente.
+Las clases creadas para el proyecto son las siguientes:
+- <a href="src/main/java/com/daw1/ong01/User.java">`User.java`</a>: clase no implementada por errores
+- <a href="src/main/java/com/daw1/ong01/Request.java">`Request.java`</a>: representa una solicitud con sus atributos y métodos asociados
+- <a href="src/main/java/com/daw1/ong01/Requests.java">`Requests.java`</a>: proporciona métodos estáticos para interactuar con la base de datos y realizar operaciones relacionadas con las solicitudes
+- <a href="src/main/java/com/daw1/ong01/UserDB.java">`UserDB.java`</a>: proporciona un método estático para insertar un nuevo usuario en la base de datos. (podriamos haberlo incluido en la clase usuario pero ésta erraba)
 
 ## Base de Datos
 
 Se utilizó SQLite como sistema de gestión de bases de datos y se crearon las siguientes tablas:
 
-- `requests`: Almacena las solicitudes de ayuda creadas por los usuarios.
-- `skill`: Contiene los tipos de habilidades disponibles para las solicitudes.
-- `user`: Almacena la información de los usuarios registrados en la plataforma.
+- Tabla "Requests":
+        La tabla "Requests" almacena las solicitudes de ayuda realizadas por los usuarios.
+        Tiene las siguientes columnas:
+            - "ID": Es una columna de tipo entero que actúa como identificador único de cada solicitud. Se genera automáticamente con la opción "primary key autoincrement".
+            - "skill": Es una columna de tipo entero que hace referencia a la tabla "Skill". Indica la habilidad asociada a la solicitud.
+            - "User": Es una columna de tipo texto que almacena el nombre del usuario que realizó la solicitud.
+            - "Description": Es una columna de tipo texto que contiene la descripción de la solicitud.
+            - "Date": Es una columna de tipo fecha que registra la fecha en que se realizó la solicitud.
+            - "accepted": Es una columna de tipo booleano que indica si la solicitud ha sido aceptada o no.
+            - "contributor": Es una columna de tipo texto que almacena el nombre del usuario que acepta la solicitud y proporciona la ayuda.
+
+- Tabla "Skill":
+        La tabla "Skill" almacena las habilidades disponibles para las solicitudes.
+        Tiene las siguientes columnas:
+            "id": Es una columna de tipo entero que actúa como identificador único de cada habilidad.
+            "name": Es una columna de tipo texto que contiene el nombre de la habilidad.
+
+- Tabla "User":
+        La tabla "User" almacena la información de los usuarios registrados en la plataforma.
+        Tiene las siguientes columnas:
+            "id": Es una columna de tipo entero que actúa como identificador único de cada usuario. Se genera automáticamente con la opción "primary key autoincrement".
+            "userName": Es una columna de tipo texto que almacena el nombre de usuario.
+            "password": Es una columna de tipo texto que almacena la contraseña del usuario.
+            "name": Es una columna de tipo texto que guarda el nombre del usuario.
+            "phone": Es una columna de tipo texto que almacena el número de teléfono del usuario.
+            "email": Es una columna de tipo texto que guarda la dirección de correo electrónico del usuario.
+            "skill": Es una columna de tipo entero que hace referencia a la tabla "Skill". Indica la habilidad asociada al usuario.
+            "contributor": Es una columna de tipo booleano que indica si el usuario es un colaborador o no.
 
 ## Funcionalidades Principales
 
