@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="com.daw1.ong01.Requests" %>
+<%@ page import="com.daw1.ong01.Request" %>
+<%@ page import="java.util.List" %>
 <% Class.forName("org.sqlite.JDBC"); %>
 
 <html>
@@ -52,60 +55,36 @@
                     <th>Acciones</th>
                 </tr>
                 <%
-                    try {
-                        // Establecer conexión a la base de datos SQLite
-                        Connection connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db");
+                    List<Request> requests = Requests.getAllRequests();
+                    int filterCategory = 0; // Valor predeterminado para mostrar todas las solicitudes
 
-                        // Obtener la categoría de las solicitudes a mostrar
-                        String categoryParam = request.getParameter("category");
-                        int category = 0;  // Valor predeterminado
-
-                        if (categoryParam != null && !categoryParam.isEmpty()) {
-                            category = Integer.parseInt(categoryParam);
+// Verificar si se ha enviado el parámetro "category"
+                    String categoryParam = request.getParameter("category");
+                    if (categoryParam != null && !categoryParam.isEmpty()) {
+                        try {
+                            filterCategory = Integer.parseInt(categoryParam);
+                        } catch (NumberFormatException e) {
+                            // Manejar el error en caso de que el parámetro no sea un número válido
+                            e.printStackTrace();
                         }
+                    }
 
-                        // Preparar y ejecutar la consulta para obtener las solicitudes de la categoría especificada
-                        String sql = "SELECT * FROM Requests";
-                        PreparedStatement statement;
+                    for (Request req : requests) {
+                        // Obtener los detalles de la solicitud
+                        int requestID = req.getId();
+                        int skill = req.getSkill();
+                        String usuario = req.getUser();
+                        String descripcion = req.getDescription();
+                        String fecha = req.getDate();
+                        boolean accepted = req.isAccepted();
 
-                        if (category > 0) {
-                            sql += " WHERE skill = ?";
-                            statement = connection.prepareStatement(sql);
-                            statement.setInt(1, category);
-                        } else {
-                            statement = connection.prepareStatement(sql);
-                        }
-
-                        ResultSet resultSet = statement.executeQuery();
-
-                        // Recorrer el conjunto de resultados y mostrar las solicitudes de ayuda que no han sido aceptadas
-                        while (resultSet.next()) {
-                            int requestID = resultSet.getInt("ID");
-                            String skill = resultSet.getString("Skill");
-                            String usuario = resultSet.getString("User");
-                            String descripcion = resultSet.getString("Description");
-                            String fecha = resultSet.getString("Date");
-                            boolean accepted = resultSet.getBoolean("Accepted");
-
-                            // Mostrar la solicitud solo si no ha sido aceptada
-                            if (!accepted) {
+                        // Mostrar la solicitud solo si no ha sido aceptada
+                        if (!accepted) {
+                            // Aplicar el filtro según la categoría seleccionada
+                            if (filterCategory == 0 || skill == filterCategory) {
                                 // Mostrar cada solicitud en una fila de la tabla
                                 out.println("<tr>");
-                                switch (skill) {
-                                    case "1":
-                                        skill = "Carpinteria";
-                                        break;
-                                    case "2":
-                                        skill = "Electricidad";
-                                        break;
-                                    case "3":
-                                        skill = "Fontaneria";
-                                        break;
-                                    case "4":
-                                        skill = "Jardineria";
-                                        break;
-                                }
-                                out.println("<td>" + skill + "</td>");
+                                out.println("<td>" + Requests.getCategoryName(skill) + "</td>");
                                 out.println("<td>" + usuario + "</td>");
                                 out.println("<td>" + descripcion + "</td>");
                                 out.println("<td>" + fecha + "</td>");
@@ -119,13 +98,6 @@
                                 out.println("</tr>");
                             }
                         }
-
-                        // Cerrar la conexión y liberar los recursos
-                        resultSet.close();
-                        statement.close();
-                        connection.close();
-                    } catch (SQLException e) {
-                        out.println("Error al conectar a la base de datos: " + e.getMessage());
                     }
                 %>
             </table>

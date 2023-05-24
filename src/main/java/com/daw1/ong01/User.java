@@ -1,5 +1,4 @@
 package com.daw1.ong01;
-import java.sql.*;
 
 public class User {
     private int id;
@@ -11,7 +10,9 @@ public class User {
     private int skill;
     private boolean contributor;
 
-    // Constructor
+    public User() {
+    }
+
     public User(int id, String userName, String password, String name, String phone, String email, int skill, boolean contributor) {
         this.id = id;
         this.userName = userName;
@@ -23,7 +24,6 @@ public class User {
         this.contributor = contributor;
     }
 
-    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -86,42 +86,5 @@ public class User {
 
     public void setContributor(boolean contributor) {
         this.contributor = contributor;
-    }
-
-    public void saveUser() throws SQLException {
-        Connection connection = null;
-        Statement statement = null;
-
-        try {
-            // Establecer conexión a la base de datos SQLite
-            connection = HelloServlet.connect();
-
-            // Crear una declaración
-            statement = connection.createStatement();
-
-            // Comprobar la existencia del número de socio introducido
-            String consultaNumSocio = "SELECT * FROM User WHERE userName='" + userName + "'";
-            ResultSet numeroDeSocios = statement.executeQuery(consultaNumSocio);
-
-            if (numeroDeSocios.next()) {
-                System.out.println("Lo siento, no se ha podido dar de alta, ya existe un socio con el nombre de usuario '" + userName + "'.");
-            } else {
-                // Realizar la inserción del usuario en la tabla
-                String insercion = "INSERT INTO User (userName, password, name, phone, email, skill, contributor) VALUES ('"
-                        + userName + "', '" + password + "', '" + name + "', '" + phone + "', '" + email + "', " + skill + ", " + (contributor ? 1 : 0) + ")";
-                statement.execute(insercion);
-                System.out.println("Socio dado de alta correctamente.");
-            }
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } finally {
-            // Cerrar la declaración y la conexión
-            if (statement != null) {
-                statement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
-        }
     }
 }
