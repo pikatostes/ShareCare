@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="styleRequest.css">
 </head>
 <body>
+<%
+    // Verificar si no hay una sesión iniciada
+    if (session.getAttribute("userName") == null) {
+        response.sendRedirect("login.jsp");
+    } else {
+%>
 <div id="container">
     <header>
         <div class="logo">
@@ -126,5 +132,8 @@
         </div>
     </div>
 </div>
+<%
+    }
+%>
 </body>
 </html>
