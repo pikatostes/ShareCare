@@ -19,13 +19,13 @@ Los lenguajes de programación utilizados en el proyecto, en orden de mayor pres
 
 Los componentes principales del proyecto son:
 
-- <a href="">`index.jsp`</a>: Página de inicio que muestra una descripción general de la plataforma y enlaces relevantes.
-- `login.jsp`: Página de inicio de sesión donde los usuarios pueden ingresar sus credenciales para acceder a su cuenta.
-- `register.jsp`: Página de registro donde los nuevos usuarios pueden crear una cuenta en la plataforma.
-- `profile.jsp`: Página de perfil de usuario que muestra información personal y permite editarla.
-- `request.jsp`: Página donde los usuarios pueden crear y enviar solicitudes de ayuda.
-- `admin.jsp`: Página de administrador para gestionar el sitio y las solicitudes de ayuda.
-- `requests.jsp`: Página que muestra todas las solicitudes de ayuda recibidas.
+- <a href="src/main/webapp/index.jsp">`index.jsp`</a>: Página de inicio que muestra una descripción general de la plataforma y enlaces relevantes.
+- <a href="src/main/webapp/login.jsp">`login.jsp`</a>: Página de inicio de sesión donde los usuarios pueden ingresar sus credenciales para acceder a su cuenta.
+- <a href="src/main/webapp/registro.jsp">`registro.jsp`</a>: Página de registro donde los nuevos usuarios pueden crear una cuenta en la plataforma.
+- <a href="src/main/webapp/profile.jsp">`profile.jsp`</a>: Página de perfil de usuario que muestra información personal y permite editarla.
+- <a href="src/main/webapp/request.jsp">`request.jsp`</a>: Página donde los usuarios pueden crear y enviar solicitudes de ayuda.
+- <a href="src/main/webapp/admin/admin.jsp">`admin.jsp`</a>: Página de administrador para gestionar el sitio y las solicitudes de ayuda.
+- <a href="src/main/webapp/admin/requests.jsp">`requests.jsp`</a>: Página que muestra todas las solicitudes de ayuda recibidas.
 
 ## Clases
 
@@ -37,36 +37,93 @@ Las clases creadas para el proyecto son las siguientes:
 
 ## Base de Datos
 
-Se utilizó SQLite como sistema de gestión de bases de datos y se crearon las siguientes tablas:
+Se utilizó SQLite como sistema de gestión de bases de datos y se creó la base de datos llamada <a href="project.db">`project.db`</a> y se crearon las siguientes tablas:
 
-- Tabla "Requests":
-        La tabla "Requests" almacena las solicitudes de ayuda realizadas por los usuarios.
+- Tabla `Requests`:
+        La tabla `Requests` almacena las solicitudes de ayuda realizadas por los usuarios.
         Tiene las siguientes columnas:
-            - "ID": Es una columna de tipo entero que actúa como identificador único de cada solicitud. Se genera automáticamente con la opción "primary key autoincrement".
-            - "skill": Es una columna de tipo entero que hace referencia a la tabla "Skill". Indica la habilidad asociada a la solicitud.
-            - "User": Es una columna de tipo texto que almacena el nombre del usuario que realizó la solicitud.
-            - "Description": Es una columna de tipo texto que contiene la descripción de la solicitud.
-            - "Date": Es una columna de tipo fecha que registra la fecha en que se realizó la solicitud.
-            - "accepted": Es una columna de tipo booleano que indica si la solicitud ha sido aceptada o no.
-            - "contributor": Es una columna de tipo texto que almacena el nombre del usuario que acepta la solicitud y proporciona la ayuda.
+    
+    ```sqlite
+    create table Requests
+    (
+        ID          integer
+            primary key autoincrement,
+        skill       INTEGER
+            references Skill,
+        User        TEXT,
+        Description TEXT,
+        Date        DATE,
+        accepted    BOOLEAN,
+        contributor TEXT
+    );
+    ```
+    
+    
+    
+    1. `ID`: Es una columna de tipo entero que actúa como identificador único de cada solicitud. Se genera automáticamente con la opción `primary key autoincrement`.
+    
+    2. `skill`: Es una columna de tipo entero que hace referencia a la tabla `Skill`. Indica la habilidad asociada a la solicitud.
+    
+    3. `User`: Es una columna de tipo texto que almacena el nombre del usuario que realizó la solicitud.
+    
+    4. `Description`: Es una columna de tipo texto que contiene la descripción de la solicitud.
+    
+    5. `Date`: Es una columna de tipo fecha que registra la fecha en que se realizó la solicitud.
+    
+    6. `accepted`: Es una columna de tipo booleano que indica si la solicitud ha sido aceptada o no.
+    
+    7. `contributor`: Es una columna de tipo texto que almacena el nombre del usuario que acepta la solicitud y proporciona la ayuda.
+    
+- Tabla `Skill`:
+        La tabla `Skill` almacena las habilidades disponibles para las solicitudes.
+        Tiene las siguientes columnas:
 
-- Tabla "Skill":
-        La tabla "Skill" almacena las habilidades disponibles para las solicitudes.
-        Tiene las siguientes columnas:
-            "id": Es una columna de tipo entero que actúa como identificador único de cada habilidad.
-            "name": Es una columna de tipo texto que contiene el nombre de la habilidad.
+    ```sqlite
+    create table Skill
+    (
+        id   INTEGER
+            primary key,
+        name TEXT
+    );
+    ```
 
-- Tabla "User":
-        La tabla "User" almacena la información de los usuarios registrados en la plataforma.
+    
+
+    1. `id`: Es una columna de tipo entero que actúa como identificador único de cada habilidad.
+
+    2. `name`: Es una columna de tipo texto que contiene el nombre de la habilidad.
+
+- Tabla `User`:
+        La tabla `User` almacena la información de los usuarios registrados en la plataforma.
         Tiene las siguientes columnas:
-            "id": Es una columna de tipo entero que actúa como identificador único de cada usuario. Se genera automáticamente con la opción "primary key autoincrement".
-            "userName": Es una columna de tipo texto que almacena el nombre de usuario.
-            "password": Es una columna de tipo texto que almacena la contraseña del usuario.
-            "name": Es una columna de tipo texto que guarda el nombre del usuario.
-            "phone": Es una columna de tipo texto que almacena el número de teléfono del usuario.
-            "email": Es una columna de tipo texto que guarda la dirección de correo electrónico del usuario.
-            "skill": Es una columna de tipo entero que hace referencia a la tabla "Skill". Indica la habilidad asociada al usuario.
-            "contributor": Es una columna de tipo booleano que indica si el usuario es un colaborador o no.
+
+    ```sqlite
+    create table User
+    (
+        id          INTEGER
+            primary key autoincrement,
+        userName    TEXT,
+        password    TEXT,
+        name        TEXT,
+        phone       TEXT,
+        email       TEXT,
+        skill       INTEGER
+            references Skill,
+        contributor BOOLEAN
+    );
+    ```
+
+    
+
+    1. `id`: Es una columna de tipo entero que actúa como identificador único de cada usuario. Se genera automáticamente con la opción `primary key autoincrement`.
+    2. `userName`: Es una columna de tipo texto que almacena el nombre de usuario.
+    3. `password`: Es una columna de tipo texto que almacena la contraseña del usuario.
+    4. `name`: Es una columna de tipo texto que guarda el nombre del usuario.
+    5. `phone`: Es una columna de tipo texto que almacena el número de teléfono del usuario.
+    6. `email`: Es una columna de tipo texto que guarda la dirección de correo electrónico del usuario.
+    7. `skill`: Es una columna de tipo entero que hace referencia a la tabla "Skill". Indica la habilidad asociada al usuario.
+    8. `contributor`: Es una columna de tipo booleano que indica si el usuario es un colaborador o no.
+
 
 ## Funcionalidades Principales
 
@@ -79,12 +136,6 @@ Las principales funcionalidades del proyecto incluyen:
 - Edición de perfil: Los usuarios pueden ver y editar su información personal y de contacto en su perfil.
 - Eliminación de solicitudes: Los usuarios pueden eliminar sus solicitudes de ayuda.
 - Administración de la página: Los administradores pueden acceder a un panel de administración para gestionar las solicitudes y otras funcionalidades del sitio.
-
-## Comentario sobre el Código
-
-El código proporcionado muestra un fragmento en JSP que maneja la autenticación de usuarios. Sin embargo, es recomendable mejorar el enfoque de seguridad en el almacenamiento de contraseñas utilizando técnicas de hashing y salting. Esto ayudará a proteger la información confidencial de los usuarios.
-
-En cuanto a la gestión de errores, el código muestra un manejo básico de excepciones al conectar con la base de datos y redireccionar al usuario en caso de autenticación exitosa o fallida. Solo se muestra información de error al usuario en caso de errores de conexión con la base de datos.
 
 ## Ejecución del Proyecto
 
