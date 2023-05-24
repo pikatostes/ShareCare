@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="com.daw1.ong01.HelloServlet" %>
 <%
     // Obtener los valores enviados desde el formulario
     String email = request.getParameter("email");
@@ -12,17 +13,17 @@
 
     try {
         // Establecer conexión a la base de datos SQLite
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db");
+        Connection connection = HelloServlet.connect();
 
         // Verificar si el usuario actual existe en la base de datos
-        String checkUserSql = "SELECT * FROM User WHERE User = ?";
+        String checkUserSql = "SELECT * FROM User WHERE userName = ?";
         PreparedStatement checkUserStatement = connection.prepareStatement(checkUserSql);
         checkUserStatement.setString(1, currentUserName);
         ResultSet checkUserResult = checkUserStatement.executeQuery();
 
         if (checkUserResult.next()) {
             // Actualizar los datos del usuario en la base de datos
-            String updateSql = "UPDATE User SET email = ?, userName = ?, password = ?, contributor = ? WHERE User = ?";
+            String updateSql = "UPDATE User SET email = ?, name = ?, password = ?, contributor = ? WHERE userName = ?";
             PreparedStatement updateStatement = connection.prepareStatement(updateSql);
             updateStatement.setString(1, email);
             updateStatement.setString(2, user);

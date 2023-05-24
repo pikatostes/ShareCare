@@ -33,7 +33,7 @@ public class HelloServlet extends HttpServlet {
     }
     
     public static Connection connect() throws ClassNotFoundException, SQLException {
-        String url="jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db";
+        String url="jdbc:sqlite:/home/zhuyana/IdeaProjects/ShareCare/project.db";
         Class.forName("org.sqlite.JDBC");
         return DriverManager.getConnection(url);
     }

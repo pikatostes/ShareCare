@@ -1,4 +1,5 @@
 <%@ page import="java.sql.*" %>
+<%@ page import="com.daw1.ong01.HelloServlet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -46,7 +47,7 @@
             </div>
             <div class="info">
                 <h2>Edit info</h2>
-                <form action="jsp/profileChange.jsp" method="post">
+                <form action="profileChange.jsp" method="post">
                     <label for="email"><input type="email" name="email" id="email" placeholder="email"></label>
                     <label for="user"><input type="text" name="user" id="user" placeholder="user"></label>
                     <label for="password"><input type="password" name="password" id="password" placeholder="<%= session.getAttribute("userName") %>"></label>
@@ -79,7 +80,7 @@
 
                 try {
                     // Establecer conexión a la base de datos SQLite
-                    Connection connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db");
+                    Connection connection = HelloServlet.connect();
 
                     // Preparar y ejecutar la consulta para obtener las solicitudes del usuario actual
                     String sql = "SELECT * FROM Requests WHERE User = ?";
@@ -151,7 +152,7 @@
             <%
                 try {
                     // Establecer conexión a la base de datos SQLite
-                    Connection connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db");
+                    Connection connection = HelloServlet.connect();
 
                     // Preparar y ejecutar la consulta para obtener las solicitudes aceptadas por el usuario actual
                     String acceptedSql = "SELECT * FROM Requests WHERE accepted = true AND contributor = ?";

@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
     <title>ShareCare - Register</title>
-    <link rel="stylesheet" href="estiloReg.css">
+    <link rel="stylesheet" href="styleReg.css">
 </head>
 <body>
 <%
@@ -40,7 +40,7 @@
             <h1>ShareCare</h1>
         </a>
     </div>
-    <form method="get" action="admin/grabarSocio.jsp">
+    <form method="get" action="registramiento.jsp">
         <h1 style="text-align: center;">Register</h1>
         <label for="email"><input type="email" id="email" name="email" required placeholder="Email"></label>
         <label for="username"><input type="text" id="username" name="userName" required placeholder="User"></label>

@@ -1,12 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="com.daw1.ong01.HelloServlet" %>
+
 <%
   // Obtener el ID de la solicitud a eliminar
   int requestID = Integer.parseInt(request.getParameter("id"));
 
   try {
     // Establecer conexión a la base de datos SQLite
-    Connection connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db");
+    Connection connection = HelloServlet.connect();
 
     // Preparar y ejecutar la consulta de eliminación
     String sql = "DELETE FROM Requests WHERE ID = ?";

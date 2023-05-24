@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="com.daw1.ong01.HelloServlet" %>
 <% Class.forName("org.sqlite.JDBC"); %>
 
 <html>
@@ -54,7 +55,7 @@
                 <%
                     try {
                         // Establecer conexión a la base de datos SQLite
-                        Connection connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db");
+                        Connection connection = HelloServlet.connect();
 
                         // Obtener la categoría de las solicitudes a mostrar
                         String categoryParam = request.getParameter("category");

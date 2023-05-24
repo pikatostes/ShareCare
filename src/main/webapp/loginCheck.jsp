@@ -12,7 +12,7 @@
   } else {
     try {
       // Establecer conexión a la base de datos SQLite
-      Connection connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db");
+      Connection connection = HelloServlet.connect();
 
       // Preparar y ejecutar la consulta para comprobar el usuario y contraseña
       String sql = "SELECT * FROM User WHERE userName = ? AND password = ?";

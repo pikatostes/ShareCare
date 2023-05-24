@@ -1,9 +1,7 @@
 <%@page import="java.sql.Statement"%>
-<%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Connection"%>
 <%@ page import="com.daw1.ong01.HelloServlet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.UUID" %>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,41 +11,29 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-  <title>ShareCare - Administration</title>
+  <title>ShareCare - Requests</title>
 </head>
 <body>
 <%
   Connection conexion = HelloServlet.connect();
   Statement s = conexion.createStatement();
-
   request.setCharacterEncoding("UTF-8");
 
-  // Comprueba la existencia del número de socio introducido
-  String consultaNumSocio = "SELECT * FROM user WHERE id="
-          + Integer.valueOf(request.getParameter("id"));
+  String actualizacion = "UPDATE requests SET "
+          + "skill=" + Integer.valueOf(request.getParameter("skill"))
+          + ", User='" + request.getParameter("User")
+          + "', Description='" + request.getParameter("Description")
+          + "', Date='" + request.getParameter("Date")
+          + "', accepted=" + Integer.valueOf(request.getParameter("accepted"))
+          + ", contributor='" + request.getParameter("contributor")
+          + "' WHERE ID=" + Integer.valueOf(request.getParameter("ID"));
+  s.execute(actualizacion);
+  out.println("Solicitud actualizado correctamente.");
 
-  ResultSet numeroDeSocios = s.executeQuery (consultaNumSocio);
-
-  if (numeroDeSocios.getInt("id") != 0) {
-    out.println("Lo siento, no se ha podido dar de alta, ya existe un socio con el número "
-            + request.getParameter("id") + ".");
-  } else {
-    String insercion = "INSERT INTO user VALUES (" + Integer.valueOf(request.getParameter("id"))
-            + ", '" + request.getParameter("userName")
-            + "', '" + request.getParameter("password")
-            + "', '" + request.getParameter("name")
-            + "', '" + request.getParameter("phone")
-            + "', '" + request.getParameter("email")
-            + "', " + Integer.valueOf(request.getParameter("skill"))
-            + ", '" + request.getParameter("contributor") + "')";
-    s.execute(insercion);
-    out.println("Socio dado de alta correctamente.");
-  }
   conexion.close();
 %>
-
 <br>
-<a href="admin.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> Página principal</button>
+<a href="requests.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> Página principal</button>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>

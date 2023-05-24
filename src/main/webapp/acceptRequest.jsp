@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="com.daw1.ong01.HelloServlet" %>
 
 <%
   // Obtener los parámetros enviados desde el formulario
@@ -8,7 +9,7 @@
 
   try {
     // Establecer conexión a la base de datos SQLite
-    Connection connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db");
+    Connection connection = HelloServlet.connect();
 
     // Actualizar la solicitud aceptada en la base de datos
     String sql = "UPDATE Requests SET accepted = 1, contributor = ? WHERE ID = ?";

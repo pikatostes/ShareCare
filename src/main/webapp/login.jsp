@@ -1,7 +1,3 @@
-<%@ page import="java.sql.Connection" %>
-<%@ page import="com.daw1.ong01.HelloServlet" %>
-<%@ page import="java.sql.PreparedStatement" %>
-<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,7 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
     <title>ShareCare - Log In</title>
-    <link rel="stylesheet" href="estiloLog.css">
+    <link rel="stylesheet" href="styleLog.css">
 </head>
 <body>
 <div id="container">
