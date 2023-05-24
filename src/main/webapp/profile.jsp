@@ -5,6 +5,17 @@
     <meta charset="UTF-8">
     <title>ShareCare - Profile</title>
     <link rel="stylesheet" href="styleProfile.css">
+    <script>
+        function showRequests() {
+            document.getElementById("myRequests").style.display = "block";
+            document.getElementById("acceptedRequests").style.display = "none";
+        }
+
+        function showAcceptedRequests() {
+            document.getElementById("myRequests").style.display = "none";
+            document.getElementById("acceptedRequests").style.display = "block";
+        }
+    </script>
 </head>
 <body>
 <div id="container">
@@ -52,7 +63,7 @@
 
             </div>
         </div>
-        <table class="styled-table">
+        <table id="myRequests" class="styled-table">
             <thead>
             <tr>
                 <th>Category</th>
@@ -126,6 +137,82 @@
             %>
             </tbody>
         </table>
+
+        <table id="acceptedRequests" class="styled-table" style="display: none;">
+            <thead>
+            <tr>
+                <th>Category</th>
+                <th>User</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+                try {
+                    // Establecer conexión a la base de datos SQLite
+                    Connection connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Alejandro\\IdeaProjects\\ShareCare\\project.db");
+
+                    // Preparar y ejecutar la consulta para obtener las solicitudes aceptadas por el usuario actual
+                    String acceptedSql = "SELECT * FROM Requests WHERE accepted = true AND contributor = ?";
+                    PreparedStatement acceptedStatement = connection.prepareStatement(acceptedSql);
+                    acceptedStatement.setString(1, userName);
+                    ResultSet acceptedResultSet = acceptedStatement.executeQuery();
+
+                    // Mostrar las solicitudes aceptadas por el usuario
+                    while (acceptedResultSet.next()) {
+                        // Obtener los detalles de la solicitud aceptada
+                        int requestID = acceptedResultSet.getInt("ID");
+                        int skill = acceptedResultSet.getInt("skill");
+                        String user = acceptedResultSet.getString("User");
+                        String requestDescription = acceptedResultSet.getString("Description");
+
+                        String skillString = String.valueOf(skill);
+
+                        switch (skill) {
+                            case 1:
+                                skillString = "Carpinteria";
+                                break;
+                            case 2:
+                                skillString = "Electricidad";
+                                break;
+                            case 3:
+                                skillString = "Fontaneria";
+                                break;
+                            case 4:
+                                skillString = "Jardineria";
+                                break;
+                        }
+
+                        // Mostrar los detalles de la solicitud aceptada en la tabla
+                        out.println("<tr>");
+                        out.println("<td>" + skillString + "</td>");
+                        out.println("<td>" + user + "</td>");
+                        out.println("<td>" + requestDescription + "</td>");
+                        out.println("<td>");
+                        out.println("<button class=\"chat-button\">Chat</button>");
+                        out.println("<form action=\"deleteRequests.jsp\" method=\"post\">");
+                        out.println("<input type=\"hidden\" name=\"id\" value=\"" + requestID + "\">");
+                        out.println("<input type=\"submit\" value=\"Eliminar\" class=\"delete-button\">");
+                        out.println("</form>");
+                        out.println("</td>");
+                        out.println("</tr>");
+                    }
+
+                    // Cerrar la conexión y liberar los recursos
+                    acceptedResultSet.close();
+                    acceptedStatement.close();
+                    connection.close();
+                } catch (SQLException e) {
+                    out.println("Error al conectar a la base de datos: " + e.getMessage());
+                }
+            %>
+            </tbody>
+        </table>
+        <div>
+            <button onclick="showRequests()">My Requests</button>
+            <button onclick="showAcceptedRequests()">Accepted Requests</button>
+        </div>
     </div>
 </div>
 </body>

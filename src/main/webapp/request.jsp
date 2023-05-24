@@ -78,42 +78,46 @@
 
                         ResultSet resultSet = statement.executeQuery();
 
-                        // Recorrer el conjunto de resultados y mostrar las solicitudes de ayuda
+                        // Recorrer el conjunto de resultados y mostrar las solicitudes de ayuda que no han sido aceptadas
                         while (resultSet.next()) {
                             int requestID = resultSet.getInt("ID");
                             String skill = resultSet.getString("Skill");
                             String usuario = resultSet.getString("User");
                             String descripcion = resultSet.getString("Description");
                             String fecha = resultSet.getString("Date");
+                            boolean accepted = resultSet.getBoolean("Accepted");
 
-                            // Mostrar cada solicitud en una fila de la tabla
-                            out.println("<tr>");
-                            switch (skill) {
-                                case "1":
-                                    skill = "Carpinteria";
-                                    break;
-                                case "2":
-                                    skill = "Electricidad";
-                                    break;
-                                case "3":
-                                    skill = "Fontaneria";
-                                    break;
-                                case "4":
-                                    skill = "Jardineria";
-                                    break;
+                            // Mostrar la solicitud solo si no ha sido aceptada
+                            if (!accepted) {
+                                // Mostrar cada solicitud en una fila de la tabla
+                                out.println("<tr>");
+                                switch (skill) {
+                                    case "1":
+                                        skill = "Carpinteria";
+                                        break;
+                                    case "2":
+                                        skill = "Electricidad";
+                                        break;
+                                    case "3":
+                                        skill = "Fontaneria";
+                                        break;
+                                    case "4":
+                                        skill = "Jardineria";
+                                        break;
+                                }
+                                out.println("<td>" + skill + "</td>");
+                                out.println("<td>" + usuario + "</td>");
+                                out.println("<td>" + descripcion + "</td>");
+                                out.println("<td>" + fecha + "</td>");
+                                out.println("<td>");
+                                out.println("<form action=\"acceptRequest.jsp\" method=\"post\">");
+                                out.println("<input type=\"hidden\" name=\"requestID\" value=\"" + requestID + "\">");
+                                out.println("<input type=\"hidden\" name=\"acceptedBy\" value=\"" + session.getAttribute("userName") + "\">");
+                                out.println("<input type=\"submit\" value=\"Aceptar\" class=\"accept-button\">");
+                                out.println("</form>");
+                                out.println("</td>");
+                                out.println("</tr>");
                             }
-                            out.println("<td>" + skill + "</td>");
-                            out.println("<td>" + usuario + "</td>");
-                            out.println("<td>" + descripcion + "</td>");
-                            out.println("<td>" + fecha + "</td>");
-                            out.println("<td>");
-                            out.println("<form action=\"acceptRequest.jsp\" method=\"post\">");
-                            out.println("<input type=\"hidden\" name=\"requestID\" value=\"" + requestID + "\">");
-                            out.println("<input type=\"hidden\" name=\"acceptedBy\" value=\"" + session.getAttribute("userName") + "\">");
-                            out.println("<input type=\"submit\" value=\"Aceptar\" class=\"accept-button\">");
-                            out.println("</form>");
-                            out.println("</td>");
-                            out.println("</tr>");
                         }
 
                         // Cerrar la conexión y liberar los recursos

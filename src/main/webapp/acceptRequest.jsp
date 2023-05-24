@@ -22,7 +22,7 @@
     connection.close();
 
     // Redireccionar al perfil del usuario después de aceptar la solicitud
-    response.sendRedirect("requests.jsp");
+    response.sendRedirect("request.jsp");
   } catch (SQLException e) {
     out.println("Error al conectar a la base de datos: " + e.getMessage());
   }
