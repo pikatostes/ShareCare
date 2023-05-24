@@ -21,7 +21,7 @@ Los componentes principales del proyecto son:
 ## Clases
 
 Se han creado dos clases diferentes:
-- <a href="">`User.java`</a>:
+- <a href="src/main/java/com/daw1/ong01/User.java">`User.java`</a>:
 
 ## Lenguajes Utilizados
 
