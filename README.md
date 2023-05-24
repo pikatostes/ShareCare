@@ -18,6 +18,10 @@ Los componentes principales del proyecto son:
 - `admin.jsp`: Página de administrador para gestionar el sitio y las solicitudes de ayuda.
 - `requests.jsp`: Página que muestra todas las solicitudes de ayuda recibidas.
 
+## Clases
+
+Se han creado dos clases diferentes `
+
 ## Lenguajes Utilizados
 
 Los lenguajes de programación utilizados en el proyecto, en orden de mayor presencia en el código, son:
