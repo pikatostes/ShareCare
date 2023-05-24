@@ -20,7 +20,8 @@ Los componentes principales del proyecto son:
 
 ## Clases
 
-Se han creado dos clases diferentes `
+Se han creado dos clases diferentes:
+- <a href="">`User.java`</a>:
 
 ## Lenguajes Utilizados
 
