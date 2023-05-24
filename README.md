@@ -1,78 +1,65 @@
-# **Documentación del archivo JSP: index.jsp**
+# Documentación del Proyecto ShareCare
 
-El archivo `index.jsp` es una página JSP (JavaServer Pages) que representa la página de inicio de la aplicación ShareCare. Proporciona la estructura básica de la página y enlaces a otras secciones del sitio.
+El principal objetivo del proyecto era crear una plataforma llamada ShareCare en la que los usuarios pueden registrarse, escribir una petición y otro usuario con conocimientos en la materia puede aceptarla. Es una página orientada a personas mayores.
 
-A continuación se presenta una descripción de las secciones principales del archivo:
+## Objetivo del Proyecto
 
-1. Importaciones:
+El objetivo principal del proyecto era desarrollar ShareCare, una plataforma donde los usuarios pueden registrarse, crear solicitudes de ayuda y otros usuarios con habilidades relevantes pueden aceptar y proporcionar asistencia. El enfoque de la plataforma es brindar apoyo a personas mayores.
 
-```jsp
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Connection"%>
-<%@ page import="com.daw1.ong01.HelloServlet" %>
-```
+## Componentes Principales
 
-En esta sección, se importan las clases necesarias para realizar operaciones de base de datos (`java.sql.Connection`, `java.sql.Statement` y `java.sql.ResultSet`) y también se importa la clase `HelloServlet` del paquete `com.daw1.ong01`. Estas importaciones permiten el acceso a funcionalidades específicas que se utilizan en el archivo.
+Los componentes principales del proyecto son:
 
-2. Configuración y cabecera de la página:
+- <a href="">`index.jsp`</a>: Página de inicio que muestra una descripción general de la plataforma y enlaces relevantes.
+- `login.jsp`: Página de inicio de sesión donde los usuarios pueden ingresar sus credenciales para acceder a su cuenta.
+- `register.jsp`: Página de registro donde los nuevos usuarios pueden crear una cuenta en la plataforma.
+- `profile.jsp`: Página de perfil de usuario que muestra información personal y permite editarla.
+- `request.jsp`: Página donde los usuarios pueden crear y enviar solicitudes de ayuda.
+- `admin.jsp`: Página de administrador para gestionar el sitio y las solicitudes de ayuda.
+- `requests.jsp`: Página que muestra todas las solicitudes de ayuda recibidas.
 
-```jsp
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+## Lenguajes Utilizados
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+Los lenguajes de programación utilizados en el proyecto, en orden de mayor presencia en el código, son:
 
-    <title>ShareCare - Index</title>
-    <link rel="stylesheet" href="estilo.css">
-</head>
-<body>
-```
+- JSP (Java Server Pages): Para la lógica del servidor y la generación de contenido dinámico.
+- CSS (Cascading Style Sheets): Para el diseño y la presentación visual de las páginas web.
+- HTML (HyperText Markup Language): Para la estructura y el marcado de las páginas web.
+- JavaScript: Para agregar interactividad y funcionalidades adicionales en el cliente.
 
-Esta sección define la configuración y cabecera de la página. Configura la codificación de caracteres como UTF-8 y establece el lenguaje como Java. Luego, se incluye el código necesario para cargar los estilos de Bootstrap, utilizando enlaces a los archivos CSS y JavaScript correspondientes. Además, se establece el título de la página como "ShareCare - Index" y se vincula el archivo CSS "estilo.css".
+## Base de Datos
 
-3. Contenido de la página:
+Se utilizó SQLite como sistema de gestión de bases de datos y se crearon las siguientes tablas:
 
-```jsp
-<div id="container">
-    <header>
-        <div class="logo">
-            <a href="index.jsp"><img src="imagen/solidarity.avif" alt=""></a>
-            <a href="index.jsp"><h1>ShareCare</h1></a>
-        </div>
-        <nav>
-            <a href="profile.jsp" class="nav-link">Lorem.</a>
-            <a href="" class="nav-link">Fugiat.</a>
-            <a href="" class="nav-link">Quam?</a>
-            <a href="" class="nav-link">Placeat!</a>
-            <a href="login.jsp" class="log-in">Log In</a>
-            <a href="registro.jsp" class="register">Register</a>
-        </nav>
-    </header>
-    <article>
+- `requests`: Almacena las solicitudes de ayuda creadas por los usuarios.
+- `skill`: Contiene los tipos de habilidades disponibles para las solicitudes.
+- `user`: Almacena la información de los usuarios registrados en la plataforma.
 
-    </article>
-</div>
-```
+## Funcionalidades Principales
 
-Esta sección representa el contenido principal de la página. Contiene un contenedor (`<div id="container">`) que engloba el encabezado y el artículo.
+Las principales funcionalidades del proyecto incluyen:
 
-- Encabezado (`<header>`): Incluye el logotipo de ShareCare y un título enlazado a la página de inicio. También contiene una barra de navegación con enlaces a diferentes secciones del sitio, como "Lorem", "Fugiat", "Quam" y "Placeat". Además, se proporcionan enlaces para iniciar sesión y registrarse.
-- Artículo (`<article>`): Este elemento es el espacio reservado para el contenido específico de la página. No contiene contenido en el código proporcionado.
+- Registro de usuarios: Los usuarios pueden crear una cuenta en la plataforma.
+- Inicio de sesión: Los usuarios pueden ingresar a su cuenta con sus credenciales.
+- Creación de solicitudes de ayuda: Los usuarios pueden crear solicitudes de ayuda especificando la categoría y descripción.
+- Aceptación de solicitudes: Otros usuarios con habilidades relevantes pueden aceptar y proporcionar ayuda para las solicitudes.
+- Edición de perfil: Los usuarios pueden ver y editar su información personal y de contacto en su perfil.
+- Eliminación de solicitudes: Los usuarios pueden eliminar sus solicitudes de ayuda.
+- Administración de la página: Los administradores pueden acceder a un panel de administración para gestionar las solicitudes y otras funcionalidades del sitio.
 
-4. Scripts al final de la página:
+## Comentario sobre el Código
 
-```jsp
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-</body>
-</html>
-```
+El código proporcionado muestra un fragmento en JSP que maneja la autenticación de usuarios. Sin embargo, es recomendable mejorar el enfoque de seguridad en el almacenamiento de contraseñas utilizando técnicas de hashing y salting. Esto ayudará a proteger la información confidencial de los usuarios.
 
-En esta sección, se incluyen los scripts de jQuery y Bootstrap  necesarios para el funcionamiento de los complementos JavaScript de  Bootstrap. Los archivos JavaScript se enlazan desde las rutas `js/jquery.min.js` y `js/bootstrap.min.js`.
+En cuanto a la gestión de errores, el código muestra un manejo básico de excepciones al conectar con la base de datos y redireccionar al usuario en caso de autenticación exitosa o fallida. Solo se muestra información de error al usuario en caso de errores de conexión con la base de datos.
+
+## Ejecución del Proyecto
+
+Para ejecutar el proyecto, se recomienda seguir estos pasos:
+
+1. Descarga o clona el repositorio de GitHub.
+2. Configura un servidor web compatible con Java Servlets y JSP, como Tomcat o TomEE.
+3. Despliega la aplicación en el servidor web.
+4. Accede a la plataforma ShareCare a través del navegador web.
+
+Ten en cuenta que estos pasos son una guía general y pueden variar dependiendo de tu entorno de desarrollo y configuración específica.
