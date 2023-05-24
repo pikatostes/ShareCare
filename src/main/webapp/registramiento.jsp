@@ -30,7 +30,11 @@
   }
 
   if (nuevoId != 0) {
+<<<<<<< HEAD
     response.sendRedirect("login.jsp");
+=======
+    response.sendRedirect("index.jsp");
+>>>>>>> origin/yana
   } else {
     out.println("Error al dar de alta al socio.");
   }
