@@ -46,7 +46,7 @@
             </div>
             <div class="info">
                 <h2>Edit info</h2>
-                <form action="jsp/profileChange.jsp" method="post">
+                <form action="profileChange.jsp" method="post">
                     <label for="email"><input type="email" name="email" id="email" placeholder="email"></label>
                     <label for="user"><input type="text" name="user" id="user" placeholder="user"></label>
                     <label for="password"><input type="password" name="password" id="password" placeholder="<%= session.getAttribute("userName") %>"></label>
@@ -191,7 +191,7 @@
                         out.println("<td>" + requestDescription + "</td>");
                         out.println("<td>");
                         out.println("<button class=\"chat-button\">Chat</button>");
-                        out.println("<form action=\"deleteRequests.jsp\" method=\"post\">");
+                        out.println("<form action=\"deleteAcceptedRequests.jsp\" method=\"post\">");
                         out.println("<input type=\"hidden\" name=\"id\" value=\"" + requestID + "\">");
                         out.println("<input type=\"submit\" value=\"Eliminar\" class=\"delete-button\">");
                         out.println("</form>");
