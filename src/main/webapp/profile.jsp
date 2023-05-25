@@ -48,7 +48,7 @@
                 <h2>Edit info</h2>
                 <form action="profileChange.jsp" method="post">
                     <label for="email"><input type="email" name="email" id="email" placeholder="email"></label>
-                    <label for="password"><input type="password" name="password" id="password" placeholder="<%= session.getAttribute("userName") %>"></label>
+                    <label for="password"><input type="password" name="password" id="password" placeholder="original password"></label>
                     <label for="role">Role:</label>
                     <select name="role" id="role">
                         <option value="0">Solicitante</option>

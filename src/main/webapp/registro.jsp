@@ -20,11 +20,29 @@
     String password = request.getParameter("password");
     String name = request.getParameter("name");
     String phone = request.getParameter("phone");
+    String skillString = request.getParameter("skill");
+    int skill = 0;
+    if (skillString != null) {
+        switch (skillString) {
+            case "1":
+                skill = 1;
+                break;
+            case "2":
+                skill = 2;
+                break;
+            case "3":
+                skill = 3;
+                break;
+            case "4":
+                skill = 4;
+                break;
+        }
+    }
 
     // Verificar si se han enviado los datos del formulario
     if (email != null && userName != null && password != null) {
         // Insertar el nuevo usuario en la base de datos
-        if (UserDB.insertUser(userName, password, name, phone, email, 0)) {
+        if (UserDB.insertUser(userName, password, name, phone, email, skill)) {
             // Redireccionar al inicio de sesión si la inserción fue exitosa
             response.sendRedirect("login.jsp");
         } else {
@@ -47,7 +65,14 @@
         <label for="password"><input type="password" id="password" name="password" required placeholder="Password"></label>
         <label for="name"><input type="text" name="name" id="name" placeholder="Name"></label>
         <label for="phone"><input type="tel" name="phone" id="phone" placeholder="Phone"></label>
-        <label for="skill"><input type="number" id="skill" name="skill" required placeholder="Skill"></label>
+        <label for="skill">
+            <select name="skill" id="skill">
+            <option value="1">Carpintería</option>
+            <option value="2">Electricidad</option>
+            <option value="3">Fontanería</option>
+            <option value="4">Jardinería</option>
+        </select>
+        </label>
         <a href="login.jsp" style="text-align: center">Already have an account?</a>
         <input type="submit" value="Register">
     </form>
