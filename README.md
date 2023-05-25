@@ -122,8 +122,8 @@ Se utilizó SQLite como sistema de gestión de bases de datos y se creó la base
 ### Diagrama de la base de datos
 | User       |                             | Requests   |                     | Skill     |
 |------------|-----------------------------|------------|---------------------|-----------|
-| id         | --------- < 1:N > --------> | ID         |                     | id        |
-| userName   |                             | skill      | --------- < 1:1 > --------> | name      |
+| id         | --------- < 1:N > --------> | ID         | --------- < 1:1 > --------> | id        |
+| userName   |                             | skill      |                     | name      |
 | password   |                             | User       |                     |           |
 | name       |                             | Description|                     |           |
 | phone      |                             | Date       |                     |           |
