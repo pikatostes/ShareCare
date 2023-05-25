@@ -57,9 +57,7 @@ Se utilizó SQLite como sistema de gestión de bases de datos y se creó la base
         contributor TEXT
     );
     ```
-    
-    
-    
+
     1. `ID`: Es una columna de tipo entero que actúa como identificador único de cada solicitud. Se genera automáticamente con la opción `primary key autoincrement`.
     
     2. `skill`: Es una columna de tipo entero que hace referencia a la tabla `Skill`. Indica la habilidad asociada a la solicitud.
@@ -87,8 +85,6 @@ Se utilizó SQLite como sistema de gestión de bases de datos y se creó la base
     );
     ```
 
-    
-
     1. `id`: Es una columna de tipo entero que actúa como identificador único de cada habilidad.
 
     2. `name`: Es una columna de tipo texto que contiene el nombre de la habilidad.
@@ -113,8 +109,6 @@ Se utilizó SQLite como sistema de gestión de bases de datos y se creó la base
     );
     ```
 
-    
-
     1. `id`: Es una columna de tipo entero que actúa como identificador único de cada usuario. Se genera automáticamente con la opción `primary key autoincrement`.
     2. `userName`: Es una columna de tipo texto que almacena el nombre de usuario.
     3. `password`: Es una columna de tipo texto que almacena la contraseña del usuario.
@@ -124,6 +118,18 @@ Se utilizó SQLite como sistema de gestión de bases de datos y se creó la base
     7. `skill`: Es una columna de tipo entero que hace referencia a la tabla "Skill". Indica la habilidad asociada al usuario.
     8. `contributor`: Es una columna de tipo booleano que indica si el usuario es un colaborador o no.
 
+
+### Diagrama de la base de datos
+| User       |                             | Requests   |                     | Skill     |
+|------------|-----------------------------|------------|---------------------|-----------|
+| id         | --------- < 1:N > --------> | ID         |                     | id        |
+| userName   |                             | skill      | --------- < 1:1 > --------> | name      |
+| password   |                             | User       |                     |           |
+| name       |                             | Description|                     |           |
+| phone      |                             | Date       |                     |           |
+| email      |                             | accepted   |                     |           |
+| skill      | ----- < references > ---->  | contributor|                     |           |
+| contributor|
 
 ## Funcionalidades Principales
 
